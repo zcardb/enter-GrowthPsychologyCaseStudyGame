@@ -1,93 +1,122 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* 《空间的理由》 design system — warm editorial comic.
+   All colors are HSL triplets consumed via hsl(var(--token)). */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Paper & ink */
+    --background: 40 45% 95%;
+    --foreground: 24 22% 13%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 42 60% 98.5%;
+    --card-foreground: 24 22% 13%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 42 60% 98.5%;
+    --popover-foreground: 24 22% 13%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Terracotta */
+    --primary: 14 64% 49%;
+    --primary-foreground: 40 60% 98%;
+    --primary-soft: 16 70% 92%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Sage */
+    --secondary: 140 20% 86%;
+    --secondary-foreground: 150 28% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 38 32% 89%;
+    --muted-foreground: 26 12% 38%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Mustard */
+    --accent: 42 88% 58%;
+    --accent-foreground: 24 22% 13%;
+    --accent-soft: 44 90% 88%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 4 66% 50%;
+    --destructive-foreground: 40 60% 98%;
+    --destructive-soft: 6 80% 94%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --success: 152 38% 34%;
+    --success-foreground: 40 60% 98%;
+    --success-soft: 140 40% 90%;
 
-    --radius: 0.5rem;
+    --ink: 24 22% 13%;
+    --paper: 40 45% 95%;
 
-    --sidebar-background: 0 0% 98%;
+    --border: 30 20% 78%;
+    --input: 30 20% 78%;
+    --ring: 14 64% 49%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --radius: 0.875rem;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Chapters */
+    --chapter-1: 14 64% 49%;
+    --chapter-2: 152 30% 38%;
+    --chapter-3: 38 86% 46%;
+    --chapter-4: 218 32% 44%;
+    --chapter-5: 340 42% 46%;
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    /* Floor plan */
+    --plan-floor: 38 48% 92%;
+    --plan-wall: 24 22% 18%;
+    --plan-furniture: 36 34% 83%;
+    --plan-line: 24 18% 32%;
+    --plan-rug: 150 18% 80%;
+    --plan-window: 200 55% 72%;
+    --plan-flow-good: 152 45% 36%;
+    --plan-flow-bad: 4 70% 52%;
+    --plan-highlight: 44 92% 62%;
+    --plan-zone: 14 64% 49%;
 
-    --sidebar-accent: 240 4.8% 95.9%;
+    /* Materials */
+    --mat-paper: 40 40% 93%;
+    --mat-white: 40 30% 97%;
+    --mat-oak: 34 48% 70%;
+    --mat-walnut: 22 35% 34%;
+    --mat-concrete: 30 6% 66%;
+    --mat-terrazzo: 30 18% 86%;
+    --mat-sage: 140 18% 70%;
+    --mat-terracotta: 14 56% 58%;
+    --mat-navy: 220 36% 28%;
+    --mat-mustard: 42 80% 60%;
+    --mat-linen: 36 34% 84%;
+    --mat-stone: 30 10% 80%;
+    --mat-tile: 195 22% 84%;
+    --mat-pink: 340 70% 72%;
+    --mat-charcoal: 24 8% 24%;
+    --mat-mirror: 200 30% 88%;
 
-    --sidebar-accent-foreground: 240 5.9% 10%;
+    /* Light */
+    --light-warm: 38 100% 72%;
+    --light-neutral: 48 70% 88%;
+    --light-cool: 205 80% 84%;
+    --shade: 24 30% 8%;
 
-    --sidebar-border: 220 13% 91%;
+    /* Characters */
+    --skin-1: 30 60% 86%;
+    --skin-2: 26 52% 72%;
+    --skin-3: 22 40% 52%;
+    --hair-1: 24 22% 14%;
+    --hair-2: 22 40% 32%;
+    --hair-3: 34 20% 72%;
+    --hair-4: 14 50% 40%;
 
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
+    /* Effects */
+    --shadow-comic: 3px 3px 0 0 hsl(var(--ink));
+    --shadow-comic-lg: 5px 5px 0 0 hsl(var(--ink));
+    --shadow-soft: 0 12px 32px -16px hsl(var(--ink) / 0.35);
+    --gradient-paper: radial-gradient(circle at 20% 0%, hsl(var(--accent-soft)) 0%, transparent 45%),
+      radial-gradient(circle at 100% 30%, hsl(var(--primary-soft)) 0%, transparent 40%);
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 40 45% 95%;
+    --sidebar-foreground: 24 22% 13%;
+    --sidebar-primary: 14 64% 49%;
+    --sidebar-primary-foreground: 40 60% 98%;
+    --sidebar-accent: 38 32% 89%;
+    --sidebar-accent-foreground: 24 22% 13%;
+    --sidebar-border: 30 20% 78%;
+    --sidebar-ring: 14 64% 49%;
   }
 }
 
@@ -96,8 +125,34 @@
     @apply border-border;
   }
 
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background font-sans text-foreground antialiased;
+    background-image: var(--gradient-paper);
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .pt-safe {
+    padding-top: max(env(safe-area-inset-top), 0.75rem);
+  }
+  .pb-safe {
+    padding-bottom: max(env(safe-area-inset-bottom), 0.75rem);
+  }
+  .px-safe {
+    padding-left: max(env(safe-area-inset-left), 1rem);
+    padding-right: max(env(safe-area-inset-right), 1rem);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .paper-dots {
+    background-image: radial-gradient(hsl(var(--ink) / 0.08) 1px, transparent 1px);
+    background-size: 14px 14px;
   }
 }
 
@@ -105,5 +160,5 @@ html,
 body,
 #root {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
 }

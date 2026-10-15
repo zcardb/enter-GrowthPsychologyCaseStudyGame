@@ -1,26 +1,24 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const NotFound = () => {
   const location = useLocation();
   const { t } = useTranslation();
 
   useEffect(() => {
-    console.error(
-      "404 Error: User attempted to access non-existent route:",
-      location.pathname
-    );
+    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-gray-600">{t("notFound.title")}</p>
-        <a href="/" className="text-blue-500 underline hover:text-blue-700">
-          {t("notFound.actions.backHome")}
-        </a>
+    <div className="pt-safe pb-safe px-safe flex min-h-[100dvh] items-center justify-center">
+      <div className="rounded-lg border-2 border-ink bg-card p-8 text-center shadow-comic-lg">
+        <h1 className="font-display text-6xl font-black">404</h1>
+        <p className="mb-5 mt-2 text-lg text-muted-foreground">{t("notFound.title")}</p>
+        <Button asChild variant="comic" size="xl">
+          <Link to="/">{t("notFound.actions.backHome")}</Link>
+        </Button>
       </div>
     </div>
   );

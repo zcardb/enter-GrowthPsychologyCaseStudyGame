@@ -1,13 +1,7 @@
 {
   "version": 1,
-  "fallbackLng": "en",
+  "fallbackLng": "zh-CN",
   "languages": [
-    {
-      "code": "en",
-      "label": "English",
-      "detect": ["en"],
-      "dir": "ltr"
-    },
     {
       "code": "zh-CN",
       "label": "简体中文",

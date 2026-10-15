@@ -1,6 +1,8 @@
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 
+const token = (name: string) => `hsl(var(--${name}) / <alpha-value>)`;
+
 export default {
 	darkMode: ["class"],
 	content: [
@@ -19,39 +21,107 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['"Noto Sans SC"', 'system-ui', '-apple-system', '"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
+				display: ['"Noto Serif SC"', '"Songti SC"', 'serif'],
+			},
 			colors: {
-				border: 'hsl(var(--border))',
-				input: 'hsl(var(--input))',
-				ring: 'hsl(var(--ring))',
-				background: 'hsl(var(--background))',
-				foreground: 'hsl(var(--foreground))',
+				border: token('border'),
+				input: token('input'),
+				ring: token('ring'),
+				background: token('background'),
+				foreground: token('foreground'),
+				ink: token('ink'),
+				paper: token('paper'),
 				primary: {
-					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					DEFAULT: token('primary'),
+					foreground: token('primary-foreground'),
+					soft: token('primary-soft')
 				},
 				secondary: {
-					DEFAULT: 'hsl(var(--secondary))',
-					foreground: 'hsl(var(--secondary-foreground))'
+					DEFAULT: token('secondary'),
+					foreground: token('secondary-foreground')
 				},
 				destructive: {
-					DEFAULT: 'hsl(var(--destructive))',
-					foreground: 'hsl(var(--destructive-foreground))'
+					DEFAULT: token('destructive'),
+					foreground: token('destructive-foreground'),
+					soft: token('destructive-soft')
+				},
+				success: {
+					DEFAULT: token('success'),
+					foreground: token('success-foreground'),
+					soft: token('success-soft')
 				},
 				muted: {
-					DEFAULT: 'hsl(var(--muted))',
-					foreground: 'hsl(var(--muted-foreground))'
+					DEFAULT: token('muted'),
+					foreground: token('muted-foreground')
 				},
 				accent: {
-					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
+					DEFAULT: token('accent'),
+					foreground: token('accent-foreground'),
+					soft: token('accent-soft')
 				},
 				popover: {
-					DEFAULT: 'hsl(var(--popover))',
-					foreground: 'hsl(var(--popover-foreground))'
+					DEFAULT: token('popover'),
+					foreground: token('popover-foreground')
 				},
 				card: {
-					DEFAULT: 'hsl(var(--card))',
-					foreground: 'hsl(var(--card-foreground))'
+					DEFAULT: token('card'),
+					foreground: token('card-foreground')
+				},
+				chapter: {
+					1: token('chapter-1'),
+					2: token('chapter-2'),
+					3: token('chapter-3'),
+					4: token('chapter-4'),
+					5: token('chapter-5')
+				},
+				plan: {
+					floor: token('plan-floor'),
+					wall: token('plan-wall'),
+					furniture: token('plan-furniture'),
+					line: token('plan-line'),
+					rug: token('plan-rug'),
+					window: token('plan-window'),
+					good: token('plan-flow-good'),
+					bad: token('plan-flow-bad'),
+					highlight: token('plan-highlight'),
+					zone: token('plan-zone')
+				},
+				mat: {
+					paper: token('mat-paper'),
+					white: token('mat-white'),
+					oak: token('mat-oak'),
+					walnut: token('mat-walnut'),
+					concrete: token('mat-concrete'),
+					terrazzo: token('mat-terrazzo'),
+					sage: token('mat-sage'),
+					terracotta: token('mat-terracotta'),
+					navy: token('mat-navy'),
+					mustard: token('mat-mustard'),
+					linen: token('mat-linen'),
+					stone: token('mat-stone'),
+					tile: token('mat-tile'),
+					pink: token('mat-pink'),
+					charcoal: token('mat-charcoal'),
+					mirror: token('mat-mirror')
+				},
+				light: {
+					warm: token('light-warm'),
+					neutral: token('light-neutral'),
+					cool: token('light-cool')
+				},
+				shade: token('shade'),
+				skin: {
+					1: token('skin-1'),
+					2: token('skin-2'),
+					3: token('skin-3')
+				},
+				hair: {
+					1: token('hair-1'),
+					2: token('hair-2'),
+					3: token('hair-3'),
+					4: token('hair-4')
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
@@ -66,30 +136,42 @@ export default {
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				md: 'calc(var(--radius) - 4px)',
+				sm: 'calc(var(--radius) - 6px)'
+			},
+			boxShadow: {
+				comic: 'var(--shadow-comic)',
+				'comic-lg': 'var(--shadow-comic-lg)',
+				soft: 'var(--shadow-soft)'
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				shake: {
+					'0%, 100%': { transform: 'translateX(0)' },
+					'20%, 60%': { transform: 'translateX(-5px)' },
+					'40%, 80%': { transform: 'translateX(5px)' }
+				},
+				'pulse-ring': {
+					'0%': { transform: 'scale(0.9)', opacity: '0.9' },
+					'100%': { transform: 'scale(1.6)', opacity: '0' }
+				},
+				'dash-flow': {
+					to: { strokeDashoffset: '-40' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				shake: 'shake 0.45s ease-in-out',
+				'pulse-ring': 'pulse-ring 1.4s ease-out infinite',
+				'dash-flow': 'dash-flow 1.6s linear infinite'
 			}
 		}
 	},

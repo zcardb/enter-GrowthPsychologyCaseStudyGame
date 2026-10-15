@@ -7,6 +7,11 @@ import { routers } from "./router";
 
 const queryClient = new QueryClient();
 
+// Dev-only: verify all 50 levels are complete and internally consistent.
+if (import.meta.env.DEV) {
+  void import("./game/validate-content").then((m) => m.reportContentIssues());
+}
+
 const App = () => {
   const router = createBrowserRouter(routers);
   return (

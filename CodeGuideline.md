@@ -9,11 +9,22 @@ project-root/
   │   └── locales/           # public/locales/{code}.json translation files
   ├── src/
   │   ├── components/        # All reusable UI components
-  │   │   └── ui/            # Prebuilt and custom UI components, grouped by function
-  │   ├── hooks/             # Custom React hooks
+  │   │   ├── ui/            # Prebuilt and custom UI components, grouped by function
+  │   │   ├── comic/         # Character (parametric SVG cast), SpeechBubble
+  │   │   ├── scene/         # SceneView → FloorPlanView / ElevationView / BudgetView, BeforeAfter, glyphs
+  │   │   └── game/          # PrincipleCard, ProgressBar, chapter color maps
+  │   ├── game/              # 《空间的理由》 content + engine (pure TS, no React)
+  │   │   ├── types.ts       # Level / Option / Scene / Principle content model
+  │   │   ├── chapters.ts, principles.ts, designer.ts
+  │   │   ├── levels/        # chapter1..5.ts (10 levels each), index.ts (ordered LEVELS + lookups), helpers.ts
+  │   │   ├── scenes/        # build.ts (scene/op authoring helpers), apply-ops.ts (base + ops → scene)
+  │   │   ├── level-flow.ts  # Level state machine reducer + linear unlock rule
+  │   │   ├── progress-store.ts # localStorage progress with in-memory fallback
+  │   │   └── validate-content.ts # Dev-time 50-level content checks (run from App.tsx in dev)
+  │   ├── hooks/             # Custom React hooks (use-game-progress, use-level-flow, ...)
   │   ├── i18n/              # i18n runtime: config.ts (entry) + util.ts (helpers)
   │   ├── lib/               # Utility functions and libraries
-  │   ├── pages/             # Application pages (each page in its own subdirectory)
+  │   ├── pages/             # home/ (chapter directory), play/ (/play/:levelId stages), principles/, NotFound
   │   ├── App.tsx            # Main app component, sets up route providers
   │   ├── router.tsx         # Router config, sets up routing
   │   ├── main.tsx           # Entry point for the React app

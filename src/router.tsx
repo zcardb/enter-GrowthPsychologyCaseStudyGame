@@ -1,11 +1,23 @@
-import Index from "./pages/Index";
+import Home from "./pages/home";
+import Play from "./pages/play";
+import Principles from "./pages/principles";
 import NotFound from "./pages/NotFound";
 
 export const routers = [
   {
     path: "/",
     name: "home",
-    element: <Index />,
+    element: <Home />,
+  },
+  {
+    path: "/play/:levelId",
+    name: "play",
+    element: <Play />,
+  },
+  {
+    path: "/principles",
+    name: "principles",
+    element: <Principles />,
   },
   /* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */
   {

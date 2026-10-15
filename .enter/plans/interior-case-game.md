@@ -1,72 +1,86 @@
-# 「空间心理学」室内设计案例抉择小游戏
+# 《空间的理由》50 关室内设计互动案例游戏
 
 ## Context
-用户想参考 growth.design 的 psychology 法则库和 case-studies 漫画案例的形式，做一个**室内设计主题**的小游戏，能力灵感来自所列 skill（户型识图、平面布局、保留结构/允许修改、风格迁移、材质替换、结构化数据生成 SVG 平面图）。
-已确认：玩法 = 案例抉择分支（真实场景 A/B 二选一 → 立刻看后果 + 法则解析）；中文为主、保留 i18n 结构；进度用 localStorage，无需后端。
+用户要做一款中文、手机竖屏优先的互动漫画小游戏：借鉴 Growth.Design 的分镜案例 + 法则讲解方式（原创人物、剧情、画面），玩家在客户故事的关键时刻选择设计方案，看到空间体验变化，再看法则复盘。借鉴所列 Skill 的「理解现状 → 保留条件 → 提出修改 → 比较效果」工作流，但首版是离线预制内容，不做识图、效果图生成或 CAD/3D 导出。
 
-当前项目是空模板（React + Vite + shadcn + framer-motion + i18n 脚手架），首页为占位页。
+已确认的边界：
+- 中文为主，保留现有 i18n 结构；进度存 localStorage，存储不可用时仍可玩（内存兜底），不需要后端。
+- 首版不生成插画，人物、户型、空间变化全部用 DOM/SVG 原创绘制。
+- 当前模板没有品牌片头、游戏测试契约、游戏就绪报告或 `build.sh`，不臆造；用 `pnpm lint` + `tsc` + `pnpm run build` 验证，「游戏就绪」以首关可玩为准。保留 `bootstrapGeneratedSiteAnalytics()`。
 
-## 游戏设计
+## 玩法
+- 5 章 × 10 关 = 50 关，线性顺序解锁：户型与动线 / 收纳与日常 / 光线与感受 / 材质与风格 / 预算与取舍。
+- 每关流程（状态机）：`story`（4–6 幕分镜）→ `choice`（2–3 个方案）→ `outcome`
+  - 不符合约束：展示房间变化 + 客户反应 + 具体问题 →「回到选择点」重选（已试过的选项标记）。
+  - 符合约束：展示前后对照 + 客户反应 → `review` 复盘 → 通关并解锁下一关。
+- 复盘分三栏：**客户的明确约束**（本关列出的硬条件）／**设计取舍**（这个方案放弃了什么）／**法则启发**（关联 1–2 条法则，注明「启发，不是定论」）。不把审美偏好写成科学结论。
+- 每关有独立客户、户型问题和取舍；约 20 条法则跨关复用。
+- 首页：章节目录（每章 10 关节点、锁定/已通关状态）、总进度、「继续」入口、法则回顾入口。关卡内：返回、继续、重试。法则回顾页：已遇到的法则卡 + 在哪些关出现过。
 
-**页面**
-1. 首页 `/`：Hero（标题「空间心理学」、副标题、总进度/总分/已解锁法则数）+ 案例卡片网格（仿 case-studies：分类标签、预计时长、完成状态、得分）。
-2. 案例页 `/case/:caseId`：顶部进度条；每一步 = 业主委托（漫画对话气泡）+ 现状平面图 → 两个方案卡 A/B（各带 SVG 示意）→ 选择后翻出结果面板：后果描述（「入住半年后…」）、得分、解锁的法则卡（名称 + 一句话定义 + 设计 tip）。最后一步后显示结算页：得分、满意度评级、本案法则回顾、下一个案例按钮。
-3. 法则图鉴 `/laws`：按四类分组（仿 psychology 的 信息/意义/时间/记忆 → 改为 看见 / 理解 / 行动 / 记忆），已解锁显示详情，未解锁显示锁定态。
+## 内容数据模型（`src/game/types.ts`）
+- `Principle`：id、名称、一句话、空间里的体现、使用边界（何时不适用）。
+- `Chapter`：id、序号、标题、导语、主题色 token。
+- `Level`：id（如 `c1-l03`）、chapterId、序号、标题、客户（名字 + 角色外观参数）、`constraints: string[]`、`baseScene`、`panels: Panel[]`(4–6)、`question`、`options: Option[]`(2–3)、`principleIds`。
+- `Panel`：speaker（客户/设计师/旁白）、表情、台词、可选 `sceneFocus`（高亮户型某区域）。
+- `Option`：id、标签、方案描述、`sceneDelta`（对 baseScene 的移动/增删家具、灯光层、材质、动线、预算条）、`passes: boolean`、客户反应台词 + 表情、`problem`（失败时的具体问题）或 `tradeoff`（通过时的取舍）。
+- `Scene`：`kind: "plan" | "elevation" | "budget"`；plan = 房间轮廓/墙/门窗/家具/动线/区域；elevation = 立面墙面材质、色块比例、光源层与光斑；budget = 分项金额条。
+- 房间预设（客厅、厨房、主卧、儿童房、玄关、卫生间、书房、小开间、阳台等）复用，每关用 delta 改出各自情况，保证画面可复用、故事独立。
 
-**内容（6 个案例 × 3 步 = 18 个抉择，全部中文，写在数据文件里）**
-| 案例 | 分类 | 涉及法则 |
-|---|---|---|
-| 45㎡ 小客厅 | 平面布局 | 视觉焦点、通道宽度 ≥ 900mm、邻近原则 |
-| 一字厨房改造 | 动线 | 厨房工作三角、费茨定律（常用物近手）、希克定律（收纳分区） |
-| 主卧安放 | 布局 | 前景-庇护（床头靠实墙望门）、照明分层、峰终定律 |
-| 玄关与回家动线 | 动线 | 峰终定律（第一印象）、洄游动线、默认偏好 |
-| 客厅背景墙改造 | 风格 | 保留结构 vs 允许修改（承重墙）、60-30-10 配色、冯·雷斯托夫效应 |
-| 预算与选材 | 沟通 | 锚定效应、损失厌恶、宜家效应 |
+## 文件结构
+- `index.html`：标题「空间的理由」、viewport-fit=cover（安全区）、展示字体。
+- `src/index.css`、`tailwind.config.ts`：温暖编辑风 token（纸张米白、墨色、陶土主色、鼠尾草、芥末点缀、5 个章节色、plan-wall/floor/furniture/flow/highlight、正确/错误反馈色、漫画描边与硬投影、安全区 padding 工具、入场/翻页/抖动 keyframes）。全部 HSL 语义 token。
+- `src/components/ui/button.tsx`：新增 `comic`、`choice`、`ghostInk` 变体与 `xl` 尺寸；`badge.tsx` 章节变体。
+- `src/game/`
+  - `types.ts`、`principles.ts`（~20 条）、`chapters.ts`
+  - `levels/chapter1.ts` … `chapter5.ts`（各 10 关）、`levels/index.ts`（有序扁平列表 + `getLevel`、`getNextLevelId`）
+  - `scenes/rooms.ts`（房间预设）、`scenes/apply-delta.ts`（纯函数：baseScene + delta → 新 scene）
+  - `validate-content.ts`（开发期校验，见验收）
+  - `progress-store.ts`（localStorage 读写，try/catch，失败回落内存）
+- `src/hooks/use-game-progress.ts`（已通关集合、当前进度、每关尝试次数、遇到的法则；`completeLevel`、`resetLevel`、`resetAll`）
+- `src/hooks/use-level-flow.ts`（关卡状态机 reducer：next/prev panel、choose、retry、finish）
+- `src/components/comic/`：`Character.tsx`（参数化 SVG 原创人物：发型、肤色、服装色、配饰、5 种表情）、`ComicPanel.tsx`、`SpeechBubble.tsx`
+- `src/components/scene/`：`SceneView.tsx`（按 kind 分发）、`FloorPlanView.tsx`、`Furniture.tsx`、`ElevationView.tsx`、`BudgetView.tsx`、`BeforeAfter.tsx`（前/后切换对照，带变化高亮）
+- `src/components/game/`：`PrincipleCard.tsx`、`ReviewSheet.tsx`、`ChapterProgress.tsx`
+- `src/pages/home/`：`index.tsx`、`ChapterSection.tsx`、`LevelNode.tsx`（替换并删除 `src/pages/Index.tsx`）
+- `src/pages/play/`：`index.tsx`（`/play/:levelId`）、`StoryStage.tsx`、`ChoiceStage.tsx`、`OutcomeStage.tsx`、`ReviewStage.tsx`、`LevelTopBar.tsx`
+- `src/pages/principles/index.tsx`（`/principles`）
+- `src/router.tsx`：注册三条路由；`NotFound.tsx` 换新 token 样式。
+- `public/locales/zh-CN.json` / `en.json`：界面文案（按钮、标签、状态）键一致；`i18n.config.json` 的 `fallbackLng` 改为 `zh-CN`。关卡与法则正文仅中文，放在数据文件中。
+- `CodeGuideline.md`：按其要求同步目录说明。
 
-约 16 条法则，每条：id、名称、分类、一句话定义、室内应用 tip。每个选项：标签、描述、示意（visual）、得分（3/1/0）、后果文案、关联法则 id。
-
-**示意图（无需生成图片）**
-仿 plancraft 思路：用结构化数据渲染 SVG 平面图（房间轮廓、墙、门、窗、家具矩形+标签、可选动线虚线）。另有两种 visual：`palette`（配色比例条，用于 60-30-10/风格题）、`quote`（报价单卡片，用于预算题）。
-
-**视觉风格**
-仿 growth.design 漫画感：暖米白纸张底、深墨色粗描边、硬投影（offset shadow）；主色陶土橙、辅色鼠尾草绿、点缀芥末黄；平面图用独立 token（墙/地面/家具/动线）。所有颜色走 index.css HSL token + tailwind 映射，不写硬编码颜色。framer-motion 做选项翻牌、结果面板滑入、得分跳动。
-
-## 文件改动
-- `index.html`：标题、引入一款 Latin 展示字体（数字/英文用），中文走系统字体。
-- `src/index.css`、`tailwind.config.ts`：新 token（paper/ink/primary/secondary/accent/plan-*、shadow-comic、gradient）、keyframes。
-- `src/components/ui/button.tsx`：新增 `comic` / `choice` 变体；`badge.tsx` 新增分类变体。
-- `src/types/game.ts`：Principle / Case / Step / Option / Visual 类型。
-- `src/data/principles.ts`、`src/data/cases.ts`：全部中文内容。
-- `src/hooks/use-game-progress.ts`：localStorage 读写（每案例的选择、最高分、已解锁法则），提供 `recordChoice`、`resetCase`、汇总统计。
-- `src/components/plan/`：`FloorPlan.tsx`（SVG 渲染器）、`PaletteBar.tsx`、`QuoteCard.tsx`、`CaseVisual.tsx`（按 visual.kind 分发）。
-- `src/components/game/`：`PrincipleCard.tsx`、`SpeechBubble.tsx`、`ScoreBadge.tsx`（跨页复用）。
-- `src/pages/home/`：`index.tsx`、`HeroSection.tsx`、`CaseCard.tsx`（替换并删除 `src/pages/Index.tsx`）。
-- `src/pages/case/`：`index.tsx`、`StepView.tsx`、`OptionCard.tsx`、`OutcomePanel.tsx`、`CaseSummary.tsx`。
-- `src/pages/laws/index.tsx`。
-- `src/router.tsx`：注册 `/`、`/case/:caseId`、`/laws`。
-- `public/locales/zh-CN.json`、`en.json`：界面文案（导航、按钮、统计标签等）走 i18n；`i18n.config.json` 的 `fallbackLng` 改为 `zh-CN`。案例/法则正文只做中文，放数据文件。
-- `src/pages/NotFound.tsx`：文案保持 i18n，换用新 token 样式。
-- `CodeGuideline.md`：按其要求更新目录说明。
+## 布局与交互
+- 页面用 `100dvh` + 安全区 inset；关卡页为固定框架：竖屏 = 上方画面区 / 下方故事或选项区；横屏与 PC（宽 ≥ md 且横向）= 左画面、右文本两栏，按布局重排而非整体缩放。只在文本区内部必要时滚动，避免整页意外滚动。
+- 所有关键操作是真实 `<button>`（onClick，触控与鼠标通用，最小触控 44px），加 `data-testid`（如 `story-next`、`option-{id}`、`retry`、`continue`、`level-node-{id}`）。
+- 未解锁关卡访问 `/play/:id` → 提示并引导到当前可玩关；不存在的 id → 404 风格提示 + 回首页。
+- 错误、重试、通关都走同一状态机，不另写分支流程。
 
 ## Implementation checklist
-- [ ] index.css / tailwind.config.ts 定义纸张、墨色、陶土、鼠尾草、芥末、plan-* 色与 shadow-comic，无硬编码颜色
-- [ ] button `comic`/`choice` 变体、badge 分类变体
-- [ ] `src/types/game.ts` 类型完整（visual 为 plan | palette | quote 联合类型）
-- [ ] `principles.ts` ≥ 16 条、四类分组；`cases.ts` 6 案例 × 3 步，每步 A/B 各有得分、后果、法则 id
-- [ ] 所有选项引用的 principle id 都存在于 principles.ts
-- [ ] `FloorPlan` 能渲染墙、门、窗、家具、动线虚线，按容器自适应（viewBox）
-- [ ] `use-game-progress` 持久化到 localStorage，刷新后进度/分数/解锁保留，可重玩单个案例
-- [ ] 首页：Hero 统计 + 案例网格（完成态、得分）
-- [ ] 案例页：步骤进度、选择后锁定、结果面板展示后果+法则卡、下一步、结算页
-- [ ] 法则图鉴：已解锁/未解锁两种状态
-- [ ] 路由注册三页，删除旧 `src/pages/Index.tsx`
-- [ ] zh-CN / en 界面文案键一致，fallbackLng = zh-CN
-- [ ] CodeGuideline.md 更新
+- [ ] 设计 token（index.css / tailwind.config.ts）与 button/badge 变体，无硬编码颜色
+- [ ] `src/game/types.ts` 定义 Principle/Chapter/Level/Panel/Option/Scene/SceneDelta
+- [ ] `principles.ts` 约 20 条，每条含「使用边界」
+- [ ] `apply-delta.ts` 纯函数支持移动/增删家具、灯光层、材质、动线、预算项
+- [ ] `rooms.ts` 房间预设；`FloorPlanView`/`ElevationView`/`BudgetView` 用 viewBox 自适应渲染
+- [ ] `BeforeAfter` 对照与变化高亮
+- [ ] `Character` 参数化人物 + 5 种表情；`ComicPanel`/`SpeechBubble`
+- [ ] 第 1–5 章各 10 关内容：每关 4–6 幕、2–3 选项、≥1 通过且 ≥1 不通过、每个选项有反应与问题/取舍、principleIds 有效
+- [ ] `validate-content.ts`：总数 = 50、ID 唯一、每章 10 关、幕数与选项数范围、通过/不通过各至少一个、法则 id 存在、文案非空；开发模式启动时运行并在控制台报错
+- [ ] `progress-store.ts` localStorage 读写 + 不可用时内存兜底
+- [ ] `use-game-progress` 顺序解锁、重玩、清空进度
+- [ ] `use-level-flow` 状态机：story → choice → outcome（失败回到 choice / 通过进 review）→ 完成
+- [ ] 首页章节目录、总进度、继续入口；法则回顾页
+- [ ] 关卡页四个阶段组件、顶栏返回/进度、竖屏与横屏两种布局、安全区
+- [ ] 路由三页注册，删除 `src/pages/Index.tsx`，未解锁/不存在关卡的处理
+- [ ] i18n 界面文案 zh-CN/en 键一致，fallbackLng = zh-CN
+- [ ] CodeGuideline.md 同步
 
 ## Verification checklist
-- [ ] `pnpm lint` 与 `pnpm exec tsc --noEmit` 通过，`pnpm run build` 成功
-- [ ] 正向：从首页进入案例，完成 3 步，结算页分数 = 所选得分之和，对应法则在图鉴解锁
-- [ ] 默认态：清空 localStorage 后首页显示 0 进度，图鉴全部锁定
-- [ ] 边界：访问不存在的 `/case/xxx` 显示未找到提示并可返回首页；已完成案例可「重玩」并覆盖最高分逻辑正确（保留最高分）
-- [ ] 刷新页面后进度保留
-- [ ] 截图验证 `/` 与 `/case/:id` 在 mobile_390 与 desktop_1280 下布局正常，平面图不溢出
+- [ ] `pnpm lint`、`pnpm exec tsc --noEmit`、`pnpm run build` 全部通过
+- [ ] 开发模式控制台无 `validate-content` 报错（50 关、ID 唯一、结构完整）
+- [ ] 首关可玩：分镜翻页 → 选不通过选项看到具体问题 → 回到选择点重选 → 选通过选项 → 复盘三栏 → 解锁第 2 关
+- [ ] 默认态：清空 localStorage 后只解锁第 1 关；直接访问第 2 关被引导回第 1 关
+- [ ] 边界：不存在的 levelId 显示提示可回首页；第 10 关通关后进入第 2 章；第 50 关通关后显示全部完成
+- [ ] 刷新后进度恢复；重玩已通关关卡不影响后续解锁
+- [ ] localStorage 抛错（模拟）时仍可游玩
+- [ ] 截图检查首页与关卡页：mobile_375、mobile_390 竖屏，一种横屏自定义尺寸（如 844×390），desktop_1280；按钮不被遮挡、文字可读、无整页意外滚动
+- [ ] 抽查每章至少 2 关的故事、各选项结果、法则解释与通关条件
+- [ ] 实施完成后按实际构建结果汇报，不预先声称已发布

@@ -19,7 +19,7 @@ export function BeforeAfter({ before, after, changed, afterLabel }: BeforeAfterP
   return (
     <div className="flex h-full w-full flex-col">
       <div className="flex shrink-0 justify-start p-1">
-        <div className="flex rounded-full border-2 border-ink bg-card p-0.5 text-xs font-bold shadow-comic">
+        <div className="doodle-pill flex border-2 border-ink bg-card p-0.5 text-xs font-bold shadow-comic">
         {(["before", "after"] as const).map((v) => (
           <button
             key={v}
@@ -27,7 +27,7 @@ export function BeforeAfter({ before, after, changed, afterLabel }: BeforeAfterP
             data-testid={`compare-${v}`}
             onClick={() => setView(v)}
             className={cn(
-              "min-h-[32px] rounded-full px-3 transition-colors",
+              "doodle-pill min-h-[32px] px-3 transition-colors",
               view === v ? "bg-ink text-paper" : "text-muted-foreground hover:text-foreground",
             )}
           >

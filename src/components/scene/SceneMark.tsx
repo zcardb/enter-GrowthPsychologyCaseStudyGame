@@ -32,7 +32,7 @@ export function SceneMark({ mark, k, emphasized }: SceneMarkProps) {
         height={h}
         rx={h / 2}
         className={tone.box}
-        strokeWidth={1.4 * k}
+        strokeWidth={1.8 * k}
       />
       <text
         x={mark.x}

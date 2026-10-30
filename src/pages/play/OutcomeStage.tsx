@@ -45,11 +45,11 @@ export function OutcomeStage({ level, option, onRetry, onReview }: OutcomeStageP
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15 }}
         className={cn(
-          "rounded-lg border-2 border-ink p-3.5 shadow-comic",
+          "doodle-card mt-2 -rotate-1 border-2 border-ink p-3.5 shadow-comic",
           pass ? "bg-success-soft" : "animate-shake bg-destructive-soft motion-reduce:animate-none",
         )}
       >
-        <p className={cn("flex items-center gap-1.5 font-display text-base font-black", pass ? "text-success" : "text-destructive")}>
+        <p className={cn("flex items-center gap-1.5 font-display text-base", pass ? "text-success" : "text-destructive")}>
           {pass ? <CheckCircle2 className="h-5 w-5" /> : <AlertTriangle className="h-5 w-5" />}
           {pass ? t("play.outcome.pass") : t("play.outcome.fail")}
         </p>

@@ -23,7 +23,7 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['"Noto Sans SC"', 'system-ui', '-apple-system', '"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
-				display: ['"Noto Serif SC"', '"Songti SC"', 'serif'],
+				display: ['"ZCOOL KuaiLe"', '"Noto Sans SC"', '"PingFang SC"', 'system-ui', 'sans-serif'],
 			},
 			colors: {
 				border: token('border'),
@@ -36,7 +36,8 @@ export default {
 				primary: {
 					DEFAULT: token('primary'),
 					foreground: token('primary-foreground'),
-					soft: token('primary-soft')
+					soft: token('primary-soft'),
+					ink: token('primary-ink')
 				},
 				secondary: {
 					DEFAULT: token('secondary'),
@@ -142,6 +143,7 @@ export default {
 			boxShadow: {
 				comic: 'var(--shadow-comic)',
 				'comic-lg': 'var(--shadow-comic-lg)',
+				sticker: 'var(--shadow-sticker)',
 				soft: 'var(--shadow-soft)'
 			},
 			keyframes: {
@@ -164,6 +166,15 @@ export default {
 				},
 				'dash-flow': {
 					to: { strokeDashoffset: '-40' }
+				},
+				wiggle: {
+					'0%, 100%': { transform: 'rotate(0deg)' },
+					'35%': { transform: 'rotate(-1.6deg)' },
+					'70%': { transform: 'rotate(1.4deg)' }
+				},
+				float: {
+					'0%, 100%': { transform: 'translateY(0) rotate(-2deg)' },
+					'50%': { transform: 'translateY(-6px) rotate(1deg)' }
 				}
 			},
 			animation: {
@@ -171,7 +182,9 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				shake: 'shake 0.45s ease-in-out',
 				'pulse-ring': 'pulse-ring 1.4s ease-out infinite',
-				'dash-flow': 'dash-flow 1.6s linear infinite'
+				'dash-flow': 'dash-flow 1.6s linear infinite',
+				wiggle: 'wiggle 0.5s ease-in-out',
+				float: 'float 4s ease-in-out infinite'
 			}
 		}
 	},

@@ -13,17 +13,22 @@ interface PrincipleCardProps {
 export function PrincipleCard({ principle, className, footer }: PrincipleCardProps) {
   const { t } = useTranslation();
   return (
-    <article className={cn("rounded-lg border-2 border-ink bg-card p-4 shadow-comic", className)}>
+    <article
+      className={cn(
+        "tape tape-sm doodle-card border-2 border-ink bg-card p-4 pt-5 shadow-comic wobble-hover",
+        className,
+      )}
+    >
       <div className="flex items-start justify-between gap-2">
-        <h3 className="font-display text-lg font-black leading-tight">{principle.name}</h3>
-        <Badge variant="ink" className="shrink-0">
+        <h3 className="font-display text-lg leading-tight">{principle.name}</h3>
+        <Badge variant="accent" className="shrink-0">
           {principle.group}
         </Badge>
       </div>
-      <p className="mt-1.5 text-[15px] font-medium leading-relaxed">{principle.summary}</p>
+      <p className="mt-2 text-[15px] font-medium leading-relaxed">{principle.summary}</p>
       <dl className="mt-3 space-y-2 text-sm leading-relaxed">
         <div>
-          <dt className="text-xs font-bold text-primary">{t("principles.inSpace")}</dt>
+          <dt className="text-xs font-bold text-primary-ink">{t("principles.inSpace")}</dt>
           <dd>{principle.inSpace}</dd>
         </div>
         <div>

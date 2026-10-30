@@ -48,7 +48,9 @@ export function StoryStage({ level, panel, onNext, onPrev, onSkip }: StoryStageP
       }
     >
       {panel === 0 && (
-        <p className="mb-3 rounded-md bg-muted px-3 py-2 text-sm text-muted-foreground">{level.brief}</p>
+        <p className="tape tape-sm note doodle-card relative mb-3 border-2 border-ink bg-accent-soft px-3 pb-2 pl-3.5 pt-4 text-sm text-foreground">
+          {level.brief}
+        </p>
       )}
       <AnimatePresence mode="wait">
         <motion.div
@@ -70,7 +72,10 @@ export function StoryStage({ level, panel, onNext, onPrev, onSkip }: StoryStageP
         {level.panels.map((_, i) => (
           <span
             key={i}
-            className={cn("h-1.5 rounded-full transition-all", i === panel ? "w-5 bg-ink" : "w-1.5 bg-ink/25")}
+            className={cn(
+              "h-1.5 rounded-full border border-ink/40 transition-all",
+              i === panel ? "w-5 bg-primary" : "w-1.5 bg-ink/15",
+            )}
           />
         ))}
       </div>

@@ -2,121 +2,124 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 《空间的理由》 design system — warm editorial comic.
+/* 《空间的理由》 design system — macaron doodle.
    All colors are HSL triplets consumed via hsl(var(--token)). */
 @layer base {
   :root {
     /* Paper & ink */
-    --background: 40 45% 95%;
-    --foreground: 24 22% 13%;
+    --background: 20 100% 98%;
+    --foreground: 262 22% 22%;
 
-    --card: 42 60% 98.5%;
-    --card-foreground: 24 22% 13%;
+    --card: 30 100% 99%;
+    --card-foreground: 262 22% 22%;
 
-    --popover: 42 60% 98.5%;
-    --popover-foreground: 24 22% 13%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 262 22% 22%;
 
-    /* Terracotta */
-    --primary: 14 64% 49%;
-    --primary-foreground: 40 60% 98%;
-    --primary-soft: 16 70% 92%;
+    /* Strawberry macaron */
+    --primary: 348 86% 76%;
+    --primary-foreground: 262 24% 20%;
+    --primary-soft: 348 100% 93%;
+    --primary-ink: 348 64% 42%;
 
-    /* Sage */
-    --secondary: 140 20% 86%;
-    --secondary-foreground: 150 28% 20%;
+    /* Mint macaron */
+    --secondary: 158 55% 82%;
+    --secondary-foreground: 165 42% 22%;
 
-    --muted: 38 32% 89%;
-    --muted-foreground: 26 12% 38%;
+    --muted: 300 30% 95%;
+    --muted-foreground: 264 12% 40%;
 
-    /* Mustard */
-    --accent: 42 88% 58%;
-    --accent-foreground: 24 22% 13%;
-    --accent-soft: 44 90% 88%;
+    /* Lemon macaron */
+    --accent: 45 100% 74%;
+    --accent-foreground: 262 24% 20%;
+    --accent-soft: 46 100% 91%;
 
-    --destructive: 4 66% 50%;
-    --destructive-foreground: 40 60% 98%;
-    --destructive-soft: 6 80% 94%;
+    --destructive: 345 66% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --destructive-soft: 348 100% 95%;
 
-    --success: 152 38% 34%;
+    --success: 158 46% 34%;
     --success-foreground: 40 60% 98%;
-    --success-soft: 140 40% 90%;
+    --success-soft: 155 60% 91%;
 
-    --ink: 24 22% 13%;
-    --paper: 40 45% 95%;
+    --ink: 262 22% 22%;
+    --paper: 20 100% 98%;
 
-    --border: 30 20% 78%;
-    --input: 30 20% 78%;
-    --ring: 14 64% 49%;
+    --border: 268 26% 86%;
+    --input: 268 26% 86%;
+    --ring: 348 70% 55%;
 
-    --radius: 0.875rem;
+    --radius: 1rem;
 
     /* Chapters */
-    --chapter-1: 14 64% 49%;
-    --chapter-2: 152 30% 38%;
-    --chapter-3: 38 86% 46%;
-    --chapter-4: 218 32% 44%;
-    --chapter-5: 340 42% 46%;
+    --chapter-1: 348 86% 78%;
+    --chapter-2: 158 58% 76%;
+    --chapter-3: 46 96% 74%;
+    --chapter-4: 262 68% 84%;
+    --chapter-5: 326 72% 82%;
 
     /* Floor plan */
-    --plan-floor: 38 48% 92%;
-    --plan-wall: 24 22% 18%;
-    --plan-furniture: 36 34% 83%;
-    --plan-line: 24 18% 32%;
-    --plan-rug: 150 18% 80%;
-    --plan-window: 200 55% 72%;
-    --plan-flow-good: 152 45% 36%;
-    --plan-flow-bad: 4 70% 52%;
-    --plan-highlight: 44 92% 62%;
-    --plan-zone: 14 64% 49%;
+    --plan-floor: 32 70% 96%;
+    --plan-wall: 264 20% 30%;
+    --plan-furniture: 30 55% 91%;
+    --plan-line: 264 14% 46%;
+    --plan-rug: 155 45% 89%;
+    --plan-window: 195 70% 84%;
+    --plan-flow-good: 158 46% 40%;
+    --plan-flow-bad: 345 68% 56%;
+    --plan-highlight: 46 100% 70%;
+    --plan-zone: 348 62% 64%;
 
     /* Materials */
-    --mat-paper: 40 40% 93%;
-    --mat-white: 40 30% 97%;
-    --mat-oak: 34 48% 70%;
-    --mat-walnut: 22 35% 34%;
-    --mat-concrete: 30 6% 66%;
-    --mat-terrazzo: 30 18% 86%;
-    --mat-sage: 140 18% 70%;
-    --mat-terracotta: 14 56% 58%;
-    --mat-navy: 220 36% 28%;
-    --mat-mustard: 42 80% 60%;
-    --mat-linen: 36 34% 84%;
-    --mat-stone: 30 10% 80%;
-    --mat-tile: 195 22% 84%;
-    --mat-pink: 340 70% 72%;
-    --mat-charcoal: 24 8% 24%;
-    --mat-mirror: 200 30% 88%;
+    --mat-paper: 35 60% 95%;
+    --mat-white: 30 40% 99%;
+    --mat-oak: 32 58% 76%;
+    --mat-walnut: 262 26% 36%;
+    --mat-concrete: 265 8% 78%;
+    --mat-terrazzo: 30 30% 92%;
+    --mat-sage: 158 42% 78%;
+    --mat-terracotta: 16 68% 74%;
+    --mat-navy: 248 38% 42%;
+    --mat-mustard: 45 92% 72%;
+    --mat-linen: 34 48% 90%;
+    --mat-stone: 268 10% 86%;
+    --mat-tile: 190 48% 90%;
+    --mat-pink: 344 82% 86%;
+    --mat-charcoal: 265 16% 34%;
+    --mat-mirror: 200 40% 93%;
 
     /* Light */
-    --light-warm: 38 100% 72%;
-    --light-neutral: 48 70% 88%;
-    --light-cool: 205 80% 84%;
-    --shade: 24 30% 8%;
+    --light-warm: 40 100% 82%;
+    --light-neutral: 50 80% 91%;
+    --light-cool: 200 85% 89%;
+    --shade: 264 30% 16%;
 
     /* Characters */
-    --skin-1: 30 60% 86%;
-    --skin-2: 26 52% 72%;
+    --skin-1: 28 62% 88%;
+    --skin-2: 24 50% 74%;
     --skin-3: 22 40% 52%;
-    --hair-1: 24 22% 14%;
-    --hair-2: 22 40% 32%;
-    --hair-3: 34 20% 72%;
-    --hair-4: 14 50% 40%;
+    --hair-1: 262 22% 20%;
+    --hair-2: 20 35% 30%;
+    --hair-3: 40 25% 76%;
+    --hair-4: 344 45% 44%;
 
     /* Effects */
-    --shadow-comic: 3px 3px 0 0 hsl(var(--ink));
-    --shadow-comic-lg: 5px 5px 0 0 hsl(var(--ink));
-    --shadow-soft: 0 12px 32px -16px hsl(var(--ink) / 0.35);
-    --gradient-paper: radial-gradient(circle at 20% 0%, hsl(var(--accent-soft)) 0%, transparent 45%),
-      radial-gradient(circle at 100% 30%, hsl(var(--primary-soft)) 0%, transparent 40%);
+    --shadow-comic: 4px 4px 0 0 hsl(var(--ink));
+    --shadow-comic-lg: 6px 6px 0 0 hsl(var(--ink)), 11px 11px 0 0 hsl(var(--accent-soft));
+    --shadow-sticker: 3px 3px 0 0 hsl(var(--ink)), 6px 6px 0 0 hsl(var(--primary-soft));
+    --shadow-soft: 0 18px 34px -20px hsl(264 30% 26% / 0.42);
+    --gradient-paper: radial-gradient(1100px 620px at 6% -10%, hsl(348 100% 93%) 0%, transparent 62%),
+      radial-gradient(900px 520px at 102% 2%, hsl(158 70% 92%) 0%, transparent 58%),
+      radial-gradient(900px 700px at 46% 112%, hsl(46 100% 92%) 0%, transparent 62%);
 
-    --sidebar-background: 40 45% 95%;
-    --sidebar-foreground: 24 22% 13%;
-    --sidebar-primary: 14 64% 49%;
-    --sidebar-primary-foreground: 40 60% 98%;
-    --sidebar-accent: 38 32% 89%;
-    --sidebar-accent-foreground: 24 22% 13%;
-    --sidebar-border: 30 20% 78%;
-    --sidebar-ring: 14 64% 49%;
+    --sidebar-background: 20 100% 98%;
+    --sidebar-foreground: 262 22% 22%;
+    --sidebar-primary: 348 86% 76%;
+    --sidebar-primary-foreground: 262 24% 20%;
+    --sidebar-accent: 300 30% 95%;
+    --sidebar-accent-foreground: 262 22% 22%;
+    --sidebar-border: 268 26% 86%;
+    --sidebar-ring: 348 70% 55%;
   }
 }
 
@@ -134,6 +137,11 @@
     background-image: var(--gradient-paper);
     background-attachment: fixed;
   }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.55);
+    color: hsl(var(--foreground));
+  }
 }
 
 @layer utilities {
@@ -150,10 +158,153 @@
   .text-balance {
     text-wrap: balance;
   }
-  .paper-dots {
-    background-image: radial-gradient(hsl(var(--ink) / 0.08) 1px, transparent 1px);
-    background-size: 14px 14px;
+}
+
+/* Plain CSS (not inside @layer) so doodle shapes beat Tailwind radius/background utilities. */
+
+/* --- Doodle shapes: hand-drawn irregular corner radii --- */
+  .doodle-card {
+    border-radius: 1.6rem 2.2rem 1.8rem 2.4rem / 2.2rem 1.6rem 2.4rem 1.8rem;
   }
+  .doodle-card-alt {
+    border-radius: 2.4rem 1.7rem 2.2rem 1.8rem / 1.8rem 2.4rem 1.7rem 2.2rem;
+  }
+  .doodle-pill {
+    border-radius: 1.6rem 1.9rem 1.7rem 2rem / 1.9rem 1.6rem 2rem 1.7rem;
+  }
+  .sticker {
+    border-radius: 1.1rem 1.6rem 1.2rem 1.7rem / 1.5rem 1.1rem 1.7rem 1.2rem;
+    box-shadow: var(--shadow-sticker);
+  }
+  .blob {
+    border-radius: 58% 42% 47% 53% / 46% 55% 45% 54%;
+  }
+
+  /* --- Washi tape --- */
+  .tape {
+    position: relative;
+  }
+  .tape::before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: -0.7rem;
+    left: 1.15rem;
+    width: 4.75rem;
+    height: 1.35rem;
+    transform: rotate(-7deg);
+    background-image: repeating-linear-gradient(
+      90deg,
+      hsl(var(--accent) / 0.9) 0 8px,
+      hsl(var(--accent) / 0.55) 8px 16px
+    );
+    border-left: 1px solid hsl(var(--ink) / 0.18);
+    border-right: 1px solid hsl(var(--ink) / 0.18);
+    pointer-events: none;
+  }
+  .tape-mint::before {
+    background-image: repeating-linear-gradient(
+      90deg,
+      hsl(var(--secondary) / 0.95) 0 8px,
+      hsl(var(--secondary) / 0.6) 8px 16px
+    );
+  }
+  .tape-right::before {
+    left: auto;
+    right: 1.15rem;
+    transform: rotate(6deg);
+  }
+  .tape-sm::before {
+    width: 3.25rem;
+    height: 1.05rem;
+    top: -0.55rem;
+    left: 0.9rem;
+  }
+
+  /* --- Hand-drawn underline + doodle frames --- */
+  .doodle-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .doodle-underline::after {
+    content: "";
+    position: absolute;
+    left: -2%;
+    right: -2%;
+    bottom: -0.28em;
+    height: 0.34em;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8c16-6 32 4 48-1s32-8 48-2 32 9 48 3 32-8 50-2' fill='none' stroke='%23e8799a' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    pointer-events: none;
+  }
+
+  /* --- Tilts --- */
+  .tilt-l {
+    transform: rotate(-1.6deg);
+  }
+  .tilt-1 {
+    transform: rotate(-0.7deg);
+  }
+  .tilt-2 {
+    transform: rotate(1deg);
+  }
+  .tilt-l,
+  .tilt-1,
+  .tilt-2 {
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+  }
+  .wobble-hover:hover {
+    transform: rotate(0deg) translateY(-2px);
+  }
+  .wobble-hover:active {
+    transform: rotate(0deg) translate(2px, 2px);
+  }
+
+  /* --- Textures --- */
+  .paper-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.22'/%3E%3C/svg%3E");
+  }
+  .lock-hatch {
+    background-image: repeating-linear-gradient(
+      45deg,
+      hsl(var(--ink) / 0.05) 0 6px,
+      transparent 6px 12px
+    );
+  }
+  .paper-dots {
+    background-image: radial-gradient(hsl(var(--ink) / 0.07) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+  .crayon-stripes {
+    background-image: repeating-linear-gradient(
+      115deg,
+      hsl(0 0% 100% / 0.55) 0 6px,
+      transparent 6px 12px
+    );
+  }
+  .note {
+    background-image: repeating-linear-gradient(
+      hsl(var(--ink) / 0.08) 0 1px,
+      transparent 1px 1.6em
+    );
+  }
+
+/* Chapter inks: readable small text on cream paper. */
+.chapter-ink-1 {
+  color: hsl(348 62% 40%);
+}
+.chapter-ink-2 {
+  color: hsl(160 45% 26%);
+}
+.chapter-ink-3 {
+  color: hsl(36 72% 30%);
+}
+.chapter-ink-4 {
+  color: hsl(262 45% 45%);
+}
+.chapter-ink-5 {
+  color: hsl(326 48% 42%);
 }
 
 html,

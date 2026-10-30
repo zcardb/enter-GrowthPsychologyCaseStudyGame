@@ -20,7 +20,7 @@ export function ChoiceStage({ level, tried, onChoose, onBack }: ChoiceStageProps
 
   return (
     <StageShell>
-      <div className="mb-3 rounded-md border-2 border-ink bg-accent-soft p-3">
+      <div className="tape tape-mint tape-sm note doodle-card relative mb-3 border-2 border-ink bg-secondary/70 p-3 pl-3.5 pt-4">
         <p className="flex items-center gap-1.5 text-xs font-bold">
           <ClipboardList className="h-3.5 w-3.5" />
           {t("play.review.constraints")}
@@ -28,14 +28,14 @@ export function ChoiceStage({ level, tried, onChoose, onBack }: ChoiceStageProps
         <ul className="mt-1.5 space-y-0.5 text-sm leading-snug">
           {level.constraints.map((c) => (
             <li key={c} className="flex gap-1.5">
-              <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-ink" />
+              <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rotate-45 rounded-[1px] bg-ink" />
               {c}
             </li>
           ))}
         </ul>
       </div>
 
-      <h2 className="font-display text-xl font-black leading-snug">{level.question}</h2>
+      <h2 className="font-display text-xl leading-snug">{level.question}</h2>
       <p className="mb-3 text-xs text-muted-foreground">{t("play.question")}</p>
 
       <div className="flex flex-col gap-2.5">
@@ -51,12 +51,18 @@ export function ChoiceStage({ level, tried, onChoose, onBack }: ChoiceStageProps
               onClick={() => onChoose(opt.id)}
               data-testid={`option-${opt.id}`}
               className={cn(
-                "group flex w-full items-start gap-3 rounded-lg border-2 border-ink bg-card p-3 text-left shadow-comic transition-all",
-                "hover:-translate-y-0.5 hover:bg-primary-soft hover:shadow-comic-lg active:translate-x-[2px] active:translate-y-[2px] active:shadow-none",
+                "doodle-card group flex w-full items-start gap-3 border-2 border-ink bg-card p-3 text-left shadow-comic transition-all wobble-hover",
+                "hover:bg-primary-soft hover:shadow-comic-lg active:shadow-none",
+                i % 2 === 0 ? "tilt-1" : "tilt-2",
                 wasTried && "bg-muted/70 opacity-75",
               )}
             >
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-ink bg-accent font-display text-base font-black">
+              <span
+                className={cn(
+                  "sticker flex h-8 w-8 shrink-0 items-center justify-center border-2 border-ink font-display text-base",
+                  i === 0 ? "-rotate-6 bg-accent" : i === 1 ? "rotate-3 bg-primary-soft" : "-rotate-2 bg-secondary",
+                )}
+              >
                 {LETTERS[i]}
               </span>
               <span className="min-w-0 flex-1">
@@ -79,7 +85,7 @@ export function ChoiceStage({ level, tried, onChoose, onBack }: ChoiceStageProps
       <button
         type="button"
         onClick={onBack}
-        className="mt-3 min-h-[44px] w-full text-center text-sm font-medium text-muted-foreground underline-offset-4 hover:underline"
+        className="mt-3 min-h-[44px] w-full text-center text-sm font-medium text-muted-foreground underline decoration-primary decoration-wavy underline-offset-4 hover:text-foreground"
         data-testid="choice-reread"
       >
         {t("play.reread")}

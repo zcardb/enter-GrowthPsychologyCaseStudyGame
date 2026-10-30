@@ -17,15 +17,19 @@ const buttonVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+        link: "text-primary-ink underline-offset-4 hover:underline",
         comic:
-          "rounded-full border-2 border-ink bg-primary font-bold text-primary-foreground shadow-comic transition-all hover:-translate-y-0.5 hover:shadow-comic-lg active:translate-x-[2px] active:translate-y-[2px] active:shadow-none",
+          "doodle-pill border-2 border-ink bg-primary font-bold text-primary-foreground shadow-comic transition-all hover:-translate-y-0.5 hover:-rotate-1 hover:shadow-comic-lg active:translate-x-[2px] active:translate-y-[2px] active:rotate-0 active:shadow-none",
         comicLight:
-          "rounded-full border-2 border-ink bg-card font-bold text-foreground shadow-comic transition-all hover:-translate-y-0.5 hover:shadow-comic-lg active:translate-x-[2px] active:translate-y-[2px] active:shadow-none",
+          "doodle-pill border-2 border-ink bg-card font-bold text-foreground shadow-comic transition-all hover:-translate-y-0.5 hover:rotate-1 hover:shadow-comic-lg active:translate-x-[2px] active:translate-y-[2px] active:rotate-0 active:shadow-none",
         comicSuccess:
-          "rounded-full border-2 border-ink bg-success font-bold text-success-foreground shadow-comic transition-all hover:-translate-y-0.5 hover:shadow-comic-lg active:translate-x-[2px] active:translate-y-[2px] active:shadow-none",
+          "doodle-pill border-2 border-ink bg-success font-bold text-success-foreground shadow-comic transition-all hover:-translate-y-0.5 hover:rotate-1 hover:shadow-comic-lg active:translate-x-[2px] active:translate-y-[2px] active:rotate-0 active:shadow-none",
+        lemon:
+          "doodle-pill border-2 border-ink bg-accent font-bold text-accent-foreground shadow-comic transition-all hover:-translate-y-0.5 hover:-rotate-1 hover:shadow-comic-lg active:translate-x-[2px] active:translate-y-[2px] active:rotate-0 active:shadow-none",
+        sticker:
+          "sticker border-2 border-ink bg-primary-soft font-bold text-foreground transition-transform hover:-translate-y-0.5 hover:rotate-0 active:translate-y-0",
         ghostInk:
-          "rounded-full font-medium text-foreground hover:bg-ink/5 active:bg-ink/10",
+          "doodle-pill font-medium text-foreground hover:bg-ink/5 active:bg-ink/10",
       },
       size: {
         default: "h-10 px-4 py-2",

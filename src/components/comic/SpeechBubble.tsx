@@ -25,9 +25,14 @@ export function SpeechBubble({ who, mood, text, side = "left", tone = "default" 
       <motion.div
         initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
-        className={cn("rounded-md border-2 border-ink px-4 py-3 text-[15px] leading-relaxed shadow-comic", bubbleTone.narrator)}
+        className={cn(
+          "doodle-card-alt border-2 border-ink px-4 py-3 text-[15px] leading-relaxed shadow-comic",
+          bubbleTone.narrator,
+        )}
       >
-        <span className="mr-2 inline-block rounded-sm bg-ink px-1.5 py-0.5 text-[11px] font-bold text-paper">旁白</span>
+        <span className="mr-2 inline-block -rotate-2 rounded-[3px] bg-ink px-1.5 py-0.5 text-[11px] font-bold text-paper">
+          旁白
+        </span>
         {text}
       </motion.div>
     );
@@ -40,7 +45,12 @@ export function SpeechBubble({ who, mood, text, side = "left", tone = "default" 
       className={cn("flex items-end gap-2", side === "right" && "flex-row-reverse")}
     >
       <div className="flex w-16 shrink-0 flex-col items-center sm:w-[72px]">
-        <div className="aspect-square w-full overflow-hidden rounded-full border-2 border-ink bg-secondary">
+        <div
+          className={cn(
+            "aspect-square w-full overflow-hidden rounded-full border-2 border-ink bg-secondary shadow-[2px_2px_0_0_hsl(var(--ink))]",
+            side === "left" ? "-rotate-2" : "rotate-2",
+          )}
+        >
           <Character look={who.look} mood={mood} />
         </div>
         <span className="mt-1 max-w-full truncate text-[11px] font-bold leading-tight">{who.name}</span>
@@ -48,7 +58,7 @@ export function SpeechBubble({ who, mood, text, side = "left", tone = "default" 
       </div>
       <div
         className={cn(
-          "relative mb-6 flex-1 rounded-lg border-2 border-ink px-4 py-3 text-[15px] leading-relaxed shadow-comic",
+          "doodle-card relative mb-6 flex-1 border-2 border-ink px-4 py-3 text-[15px] leading-relaxed shadow-comic",
           bubbleTone[tone],
         )}
       >

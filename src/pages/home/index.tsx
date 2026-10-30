@@ -40,7 +40,7 @@ const Home = () => {
                   {t("home.reset")}
                 </Button>
               </AlertDialogTrigger>
-              <AlertDialogContent className="border-2 border-ink shadow-comic-lg">
+              <AlertDialogContent className="doodle-card border-2 border-ink shadow-comic-lg">
                 <AlertDialogHeader>
                   <AlertDialogTitle>{t("home.resetConfirm")}</AlertDialogTitle>
                 </AlertDialogHeader>

@@ -29,22 +29,22 @@ export function LevelTopBar({ level, chapter, number, stage }: LevelTopBarProps)
       </Button>
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-1.5 text-[11px] font-bold text-muted-foreground">
-          <span className={cn("h-2 w-2 shrink-0 rounded-full", chapterBg[chapter.tone])} />
+          <span className={cn("h-2.5 w-2.5 shrink-0 rotate-12 rounded-[3px] border border-ink/60", chapterBg[chapter.tone])} />
           <span className="truncate">
             {chapter.title} · {t("play.levelNo", { n: number })}
           </span>
         </div>
-        <h1 className="truncate font-display text-lg font-black leading-tight sm:text-xl">{level.title}</h1>
+        <h1 className="truncate font-display text-lg leading-tight sm:text-xl">{level.title}</h1>
       </div>
       <ol className="flex shrink-0 items-center gap-1" aria-label={t("play.stages")}>
         {STAGES.map((s, i) => (
           <li
             key={s}
             className={cn(
-              "rounded-full border-2 border-ink px-1.5 py-0.5 text-[10px] font-bold leading-none transition-colors sm:px-2 sm:text-[11px]",
-              i < current && "bg-ink text-paper",
-              i === current && "bg-accent text-accent-foreground",
-              i > current && "border-ink/25 text-muted-foreground",
+              "doodle-pill border-2 px-1.5 py-0.5 text-[10px] font-bold leading-none transition-colors sm:px-2 sm:text-[11px]",
+              i < current && "border-ink bg-ink text-paper",
+              i === current && "-rotate-2 border-ink bg-accent text-accent-foreground shadow-[2px_2px_0_0_hsl(var(--ink))]",
+              i > current && "border-ink/20 text-muted-foreground",
             )}
             aria-current={i === current ? "step" : undefined}
           >

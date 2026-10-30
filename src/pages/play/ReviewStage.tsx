@@ -62,7 +62,7 @@ export function ReviewStage({ level, option, attempts, onReplay }: ReviewStagePr
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="mb-3 flex items-center gap-2 rounded-lg border-2 border-ink bg-accent px-3 py-2 font-display text-base font-black shadow-comic"
+          className="sticker mb-3 flex -rotate-1 items-center gap-2 border-2 border-ink bg-accent px-3 py-2 font-display text-base"
           data-testid={next ? "review-chapter-done" : "review-all-done"}
         >
           <Sparkles className="h-5 w-5" />
@@ -73,7 +73,7 @@ export function ReviewStage({ level, option, attempts, onReplay }: ReviewStagePr
       <p className="text-xs font-bold text-muted-foreground">
         {t("play.review.title")} · {t("play.review.attempts", { n: attempts })}
       </p>
-      <h2 className="mt-1 font-display text-xl font-black leading-snug">{level.insight}</h2>
+      <h2 className="mt-1 font-display text-xl leading-snug">{level.insight}</h2>
 
       <section className="mt-4">
         <h3 className="text-xs font-bold text-muted-foreground">{t("play.review.constraints")}</h3>
@@ -87,7 +87,7 @@ export function ReviewStage({ level, option, attempts, onReplay }: ReviewStagePr
         </ul>
       </section>
 
-      <section className="mt-4 rounded-md border-2 border-dashed border-ink/40 p-3">
+      <section className="doodle-card mt-4 border-2 border-dashed border-ink/40 bg-accent-soft/40 p-3">
         <h3 className="text-xs font-bold text-muted-foreground">{t("play.review.tradeoff")}</h3>
         <p className="mt-1 text-sm font-bold">{option.label}</p>
         <p className="mt-0.5 text-sm leading-relaxed">{option.tradeoff}</p>

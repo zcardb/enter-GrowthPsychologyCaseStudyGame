@@ -28,7 +28,6 @@ export function Character({ look, mood, className }: CharacterProps) {
   const cy = kid ? 44 : 40;
   const hair = hairFill[elder ? 3 : look.hairTone];
   const s = "stroke-ink";
-
   const hairBack = () => {
     switch (look.hair) {
       case "long":
@@ -112,18 +111,18 @@ export function Character({ look, mood, className }: CharacterProps) {
   return (
     <svg viewBox="0 0 100 100" className={cn("h-full w-full", className)} aria-hidden="true">
       {/* Shoulders */}
-      <path d={`M${kid ? 22 : 14} 100Q${kid ? 24 : 16} ${cy + headR + 10} 50 ${cy + headR + 8}Q${kid ? 76 : 84} ${cy + headR + 10} ${kid ? 78 : 86} 100Z`} className={cn(outfitFill[look.outfit], s)} strokeWidth={2.4} />
-      <path d={`M44 ${cy + headR + 8}L50 ${cy + headR + 16}L56 ${cy + headR + 8}`} className="fill-none stroke-ink" strokeWidth={1.8} />
+      <path d={`M${kid ? 22 : 14} 100Q${kid ? 24 : 16} ${cy + headR + 10} 50 ${cy + headR + 8}Q${kid ? 76 : 84} ${cy + headR + 10} ${kid ? 78 : 86} 100Z`} className={cn(outfitFill[look.outfit], s)} strokeWidth={2.8} />
+      <path d={`M44 ${cy + headR + 8}L50 ${cy + headR + 16}L56 ${cy + headR + 8}`} className="fill-none stroke-ink" strokeWidth={2} />
       {hairBack()}
-      <rect x={cx - 6} y={cy + headR - 6} width={12} height={10} className={cn(skinFill[look.skin], s)} strokeWidth={2} />
-      <circle cx={cx} cy={cy} r={headR} className={cn(skinFill[look.skin], s)} strokeWidth={2.4} />
+      <rect x={cx - 6} y={cy + headR - 6} width={12} height={10} className={cn(skinFill[look.skin], s)} strokeWidth={2.2} />
+      <circle cx={cx} cy={cy} r={headR} className={cn(skinFill[look.skin], s)} strokeWidth={2.8} />
       {hairFront()}
       {brows()}
       {eyes()}
       {mood === "happy" && (
         <>
-          <circle cx={cx - 13} cy={cy + 9} r={3} className="fill-primary/30" />
-          <circle cx={cx + 13} cy={cy + 9} r={3} className="fill-primary/30" />
+          <circle cx={cx - 13} cy={cy + 9} r={3.4} className="fill-primary/50" />
+          <circle cx={cx + 13} cy={cy + 9} r={3.4} className="fill-primary/50" />
         </>
       )}
       {mouth()}

@@ -27,19 +27,19 @@ export function BudgetView({ scene, emphasis, className }: BudgetViewProps) {
 
   return (
     <div className={cn("flex h-full w-full flex-col justify-center gap-3 p-3 sm:p-5", className)} role="img" aria-label="预算分配示意">
-      <div className="rounded-lg border-2 border-ink bg-card p-3 shadow-comic">
+      <div className="doodle-card border-2 border-ink bg-card p-3 shadow-comic">
         <div className="flex items-baseline justify-between gap-2 text-sm">
           <span className="font-bold">合计</span>
-          <span className={cn("font-display text-xl font-black", over ? "text-destructive" : "text-success")}>
+          <span className={cn("font-sans text-xl font-extrabold tabular-nums", over ? "text-destructive" : "text-success")}>
             {fmt(total)}
             <span className="ml-1 text-xs font-medium text-muted-foreground">
               / 上限 {fmt(scene.cap)} {scene.unit}
             </span>
           </span>
         </div>
-        <div className="relative mt-2 h-3 overflow-hidden rounded-full bg-muted">
+        <div className="doodle-pill relative mt-2 h-3.5 overflow-hidden border-2 border-ink bg-muted p-[2px]">
           <div
-            className={cn("h-full rounded-full transition-all duration-500", over ? "bg-destructive" : "bg-success")}
+            className={cn("crayon-stripes doodle-pill h-full transition-all duration-500", over ? "bg-destructive" : "bg-success")}
             style={{ width: `${Math.min(fill, 1) * 100}%` }}
           />
         </div>

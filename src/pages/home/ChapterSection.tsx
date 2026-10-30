@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { chapterBg, chapterText } from "@/components/game/chapter-tone";
+import { chapterBg, chapterText, chapterTint } from "@/components/game/chapter-tone";
 import { ProgressBar } from "@/components/game/ProgressBar";
 import { levelNumber, levelsOfChapter } from "@/game/levels";
 import type { Chapter } from "@/game/types";
@@ -14,12 +14,18 @@ export function ChapterSection({ chapter }: { chapter: Chapter }) {
   const done = levels.filter((l) => cleared.has(l.id)).length;
 
   return (
-    <section aria-labelledby={`ch-${chapter.id}`} className="rounded-lg border-2 border-ink bg-card/70 p-4 sm:p-5">
+    <section
+      aria-labelledby={`ch-${chapter.id}`}
+      className={cn(
+        "doodle-card-alt border-2 border-ink p-4 shadow-[3px_3px_0_0_hsl(var(--ink)/0.12)] sm:p-5",
+        chapterTint[chapter.tone],
+      )}
+    >
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div className="flex items-center gap-3">
           <span
             className={cn(
-              "flex h-12 w-12 shrink-0 items-center justify-center rounded-md border-2 border-ink font-display text-2xl font-black text-primary-foreground shadow-comic",
+              "sticker flex h-12 w-12 shrink-0 -rotate-3 items-center justify-center border-2 border-ink font-display text-2xl text-ink",
               chapterBg[chapter.tone],
             )}
           >
@@ -29,7 +35,7 @@ export function ChapterSection({ chapter }: { chapter: Chapter }) {
             <p className={cn("text-xs font-bold uppercase tracking-wider", chapterText[chapter.tone])}>
               {t("home.chapter", { n: chapter.index })} · {chapter.subtitle}
             </p>
-            <h2 id={`ch-${chapter.id}`} className="font-display text-2xl font-black leading-tight">
+            <h2 id={`ch-${chapter.id}`} className="font-display text-2xl leading-tight">
               {chapter.title}
             </h2>
           </div>

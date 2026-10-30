@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Sparkle, Squiggle } from "@/components/comic/Doodle";
 
 const NotFound = () => {
   const location = useLocation();
@@ -13,9 +14,11 @@ const NotFound = () => {
 
   return (
     <div className="pt-safe pb-safe px-safe flex min-h-[100dvh] items-center justify-center">
-      <div className="rounded-lg border-2 border-ink bg-card p-8 text-center shadow-comic-lg">
-        <h1 className="font-display text-6xl font-black">404</h1>
-        <p className="mb-5 mt-2 text-lg text-muted-foreground">{t("notFound.title")}</p>
+      <div className="tape doodle-card-alt relative border-2 border-ink bg-card p-8 pt-10 text-center shadow-comic-lg">
+        <Sparkle className="absolute -left-3 bottom-6 h-6 w-6" />
+        <Squiggle className="absolute -right-4 top-8 w-14 text-primary-ink/40" />
+        <h1 className="font-display text-6xl doodle-underline">404</h1>
+        <p className="mb-5 mt-4 text-lg text-muted-foreground">{t("notFound.title")}</p>
         <Button asChild variant="comic" size="xl">
           <Link to="/">{t("notFound.actions.backHome")}</Link>
         </Button>

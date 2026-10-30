@@ -46,7 +46,7 @@ export function LevelPlayer({ level }: { level: Level }) {
 
       <main className="mx-auto grid min-h-0 w-full max-w-6xl flex-1 grid-rows-[minmax(26dvh,1fr)_minmax(0,auto)] gap-3 landscape:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] landscape:grid-rows-1 landscape:gap-4">
         <section
-          className="paper-dots relative min-h-0 overflow-hidden rounded-lg border-2 border-ink bg-card shadow-comic"
+          className="paper-dots doodle-card relative min-h-0 overflow-hidden border-2 border-ink bg-card shadow-comic"
           aria-label={t("play.sceneLabel")}
         >
           <AnimatePresence mode="wait">

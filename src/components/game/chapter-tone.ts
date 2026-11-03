@@ -26,3 +26,12 @@ export const chapterTint: Record<Chapter["tone"], string> = {
   4: "bg-chapter-4/25",
   5: "bg-chapter-5/20",
 };
+
+/** Highlighter swipe that matches the chapter color. */
+export const chapterMarker: Record<Chapter["tone"], string> = {
+  1: "marker-ch-1",
+  2: "marker-ch-2",
+  3: "marker-ch-3",
+  4: "marker-ch-4",
+  5: "marker-ch-5",
+};

@@ -24,6 +24,7 @@ export default {
 			fontFamily: {
 				sans: ['"Noto Sans SC"', 'system-ui', '-apple-system', '"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
 				display: ['"ZCOOL KuaiLe"', '"Noto Sans SC"', '"PingFang SC"', 'system-ui', 'sans-serif'],
+				marker: ['"Caveat"', '"ZCOOL KuaiLe"', 'cursive'],
 			},
 			colors: {
 				border: token('border'),
@@ -144,6 +145,7 @@ export default {
 				comic: 'var(--shadow-comic)',
 				'comic-lg': 'var(--shadow-comic-lg)',
 				sticker: 'var(--shadow-sticker)',
+				sketch: '2px 3px 0 0 hsl(var(--ink) / 0.16)',
 				soft: 'var(--shadow-soft)'
 			},
 			keyframes: {
@@ -175,6 +177,10 @@ export default {
 				float: {
 					'0%, 100%': { transform: 'translateY(0) rotate(-2deg)' },
 					'50%': { transform: 'translateY(-6px) rotate(1deg)' }
+				},
+				sway: {
+					'0%, 100%': { transform: 'rotate(-2deg)' },
+					'50%': { transform: 'rotate(1.5deg)' }
 				}
 			},
 			animation: {
@@ -184,7 +190,8 @@ export default {
 				'pulse-ring': 'pulse-ring 1.4s ease-out infinite',
 				'dash-flow': 'dash-flow 1.6s linear infinite',
 				wiggle: 'wiggle 0.5s ease-in-out',
-				float: 'float 4s ease-in-out infinite'
+				float: 'float 4s ease-in-out infinite',
+				sway: 'sway 5s ease-in-out infinite'
 			}
 		}
 	},

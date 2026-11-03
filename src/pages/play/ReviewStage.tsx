@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Check, Home, Info, RotateCcw, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PrincipleCard } from "@/components/game/PrincipleCard";
+import { Confetti } from "@/components/comic/Doodle";
 import { chapterById } from "@/game/chapters";
 import { levelNumber, nextLevelId, levelById } from "@/game/levels";
 import { principleById } from "@/game/principles";
@@ -62,11 +63,12 @@ export function ReviewStage({ level, option, attempts, onReplay }: ReviewStagePr
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="sticker mb-3 flex -rotate-1 items-center gap-2 border-2 border-ink bg-accent px-3 py-2 font-display text-base"
+          className="paper-tab relative mb-3 flex -rotate-1 items-center gap-2 border-2 border-ink bg-accent px-3 py-2 font-display text-base"
           data-testid={next ? "review-chapter-done" : "review-all-done"}
         >
           <Sparkles className="h-5 w-5" />
           {next ? t("play.review.chapterDone", { n: chapter?.index }) : t("play.review.allDone")}
+          <Confetti className="absolute -right-1 -top-2 h-4 w-7" />
         </motion.div>
       )}
 
@@ -87,7 +89,7 @@ export function ReviewStage({ level, option, attempts, onReplay }: ReviewStagePr
         </ul>
       </section>
 
-      <section className="doodle-card mt-4 border-2 border-dashed border-ink/40 bg-accent-soft/40 p-3">
+      <section className="tape tape-sm note-lined doodle-card relative mt-4 border-2 border-ink bg-accent-soft p-3 pt-4">
         <h3 className="text-xs font-bold text-muted-foreground">{t("play.review.tradeoff")}</h3>
         <p className="mt-1 text-sm font-bold">{option.label}</p>
         <p className="mt-0.5 text-sm leading-relaxed">{option.tradeoff}</p>

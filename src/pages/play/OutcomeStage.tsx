@@ -49,8 +49,13 @@ export function OutcomeStage({ level, option, onRetry, onReview }: OutcomeStageP
           pass ? "bg-success-soft" : "animate-shake bg-destructive-soft motion-reduce:animate-none",
         )}
       >
-        <p className={cn("flex items-center gap-1.5 font-display text-base", pass ? "text-success" : "text-destructive")}>
-          {pass ? <CheckCircle2 className="h-5 w-5" /> : <AlertTriangle className="h-5 w-5" />}
+        <p
+          className={cn(
+            "stamp inline-flex items-center gap-1.5 px-2.5 py-0.5 font-display text-sm",
+            pass ? "bg-success-soft text-success" : "bg-destructive-soft text-destructive",
+          )}
+        >
+          {pass ? <CheckCircle2 className="h-4 w-4" /> : <AlertTriangle className="h-4 w-4" />}
           {pass ? t("play.outcome.pass") : t("play.outcome.fail")}
         </p>
         <p className="mt-1.5 text-[15px] leading-relaxed">{pass ? option.tradeoff : option.problem}</p>

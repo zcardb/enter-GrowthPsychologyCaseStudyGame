@@ -17,7 +17,7 @@ const badgeVariants = cva(
         outline: "text-foreground",
         ink: "sticker border-2 border-ink bg-card text-foreground -rotate-1",
         accent: "sticker border-2 border-ink bg-accent text-accent-foreground -rotate-1",
-        pastel: "border-2 border-ink/30 bg-primary-soft text-foreground",
+        pastel: "paper-tab border-2 border-ink/50 bg-primary-soft text-foreground",
         success: "border-transparent bg-success-soft text-success",
         danger: "border-transparent bg-destructive-soft text-destructive",
       },

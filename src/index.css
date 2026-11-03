@@ -106,7 +106,7 @@
     /* Effects */
     --shadow-comic: 4px 4px 0 0 hsl(var(--ink));
     --shadow-comic-lg: 6px 6px 0 0 hsl(var(--ink)), 11px 11px 0 0 hsl(var(--accent-soft));
-    --shadow-sticker: 3px 3px 0 0 hsl(var(--ink)), 6px 6px 0 0 hsl(var(--primary-soft));
+    --shadow-sticker: 3px 4px 0 0 hsl(var(--ink)), 6px 7px 0 0 hsl(var(--primary-soft));
     --shadow-soft: 0 18px 34px -20px hsl(264 30% 26% / 0.42);
     --gradient-paper: radial-gradient(1100px 620px at 6% -10%, hsl(348 100% 93%) 0%, transparent 62%),
       radial-gradient(900px 520px at 102% 2%, hsl(158 70% 92%) 0%, transparent 58%),
@@ -134,7 +134,8 @@
 
   body {
     @apply bg-background font-sans text-foreground antialiased;
-    background-image: var(--gradient-paper);
+    background-image: radial-gradient(hsl(var(--ink) / 0.055) 1px, transparent 1px), var(--gradient-paper);
+    background-size: 22px 22px, auto;
     background-attachment: fixed;
   }
 
@@ -220,6 +221,24 @@
     top: -0.55rem;
     left: 0.9rem;
   }
+  .tape-wide::before {
+    width: 7rem;
+    height: 1.5rem;
+  }
+  .tape-lav::before {
+    background-image: repeating-linear-gradient(
+      90deg,
+      hsl(var(--chapter-4) / 0.95) 0 8px,
+      hsl(var(--chapter-4) / 0.6) 8px 16px
+    );
+  }
+  .tape-pink::before {
+    background-image: repeating-linear-gradient(
+      90deg,
+      hsl(var(--primary) / 0.9) 0 8px,
+      hsl(var(--primary) / 0.5) 8px 16px
+    );
+  }
 
   /* --- Hand-drawn underline + doodle frames --- */
   .doodle-underline {
@@ -289,6 +308,111 @@
       transparent 1px 1.6em
     );
   }
+  .note-lined {
+    background-image: repeating-linear-gradient(
+      hsl(var(--ink) / 0.09) 0 1px,
+      transparent 1px 1.9em
+    );
+  }
+  .grid-note {
+    background-image: linear-gradient(hsl(var(--ink) / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--ink) / 0.06) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+
+  /* --- Second pencil pass: a faint offset line inside the ink border --- */
+  .ink-frame {
+    position: relative;
+  }
+  .ink-frame::after {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    z-index: 3;
+    border: 1.5px solid hsl(var(--ink) / 0.26);
+    border-radius: 1.2rem 1.7rem 1.3rem 1.8rem / 1.7rem 1.2rem 1.8rem 1.3rem;
+    transform: rotate(0.3deg);
+    pointer-events: none;
+  }
+  .ink-frame-loose::after {
+    inset: 9px;
+    border-color: hsl(var(--ink) / 0.18);
+    transform: rotate(-0.35deg);
+  }
+
+  /* --- Marker highlighter swipe --- */
+  .marker,
+  .marker-pink,
+  .marker-mint {
+    padding: 0 0.12em;
+    background-repeat: no-repeat;
+    background-size: 100% 0.58em;
+    background-position: 0 82%;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .marker {
+    background-image: linear-gradient(100deg, transparent 1%, hsl(var(--accent) / 0.82) 2% 98%, transparent 99%);
+  }
+  .marker-pink {
+    background-image: linear-gradient(100deg, transparent 1%, hsl(var(--primary) / 0.7) 2% 98%, transparent 99%);
+  }
+  .marker-mint {
+    background-image: linear-gradient(100deg, transparent 1%, hsl(var(--secondary) / 0.85) 2% 98%, transparent 99%);
+  }
+  .marker-ch-1 {
+    background-image: linear-gradient(100deg, transparent 1%, hsl(var(--chapter-1) / 0.85) 2% 98%, transparent 99%);
+  }
+  .marker-ch-2 {
+    background-image: linear-gradient(100deg, transparent 1%, hsl(var(--chapter-2) / 0.9) 2% 98%, transparent 99%);
+  }
+  .marker-ch-3 {
+    background-image: linear-gradient(100deg, transparent 1%, hsl(var(--chapter-3) / 0.9) 2% 98%, transparent 99%);
+  }
+  .marker-ch-4 {
+    background-image: linear-gradient(100deg, transparent 1%, hsl(var(--chapter-4) / 0.9) 2% 98%, transparent 99%);
+  }
+  .marker-ch-5 {
+    background-image: linear-gradient(100deg, transparent 1%, hsl(var(--chapter-5) / 0.9) 2% 98%, transparent 99%);
+  }
+
+  /* --- Folded corner (paper card) --- */
+  .fold-corner {
+    background-image: linear-gradient(225deg, hsl(var(--ink) / 0.13) 0 9px, transparent 9px);
+  }
+
+  /* --- Rubber stamp --- */
+  .stamp {
+    border: 3px double hsl(var(--ink));
+    border-radius: 0.45rem 0.8rem 0.5rem 0.7rem;
+    letter-spacing: 0.08em;
+    transform: rotate(-4deg);
+    box-shadow: inset 0 0 0 2px hsl(var(--card) / 0.55);
+  }
+
+  /* --- Paper tab / torn strip --- */
+  .paper-tab {
+    position: relative;
+    border-radius: 0.5rem 1.3rem 0.65rem 1.1rem / 1.1rem 0.6rem 1.3rem 0.5rem;
+    box-shadow: 2px 2px 0 0 hsl(var(--ink) / 0.18);
+  }
+  .paper-tab::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: -1px;
+    border-width: 0 0 7px 7px;
+    border-style: solid;
+    border-color: transparent transparent hsl(var(--ink) / 0.2) transparent;
+    border-bottom-left-radius: 2px;
+    pointer-events: none;
+  }
+
+  /* --- Stitched seam --- */
+  .sketch-seam {
+    height: 0;
+    border-top: 2px dashed hsl(var(--ink) / 0.24);
+  }
 
 /* Chapter inks: readable small text on cream paper. */
 .chapter-ink-1 {
@@ -312,4 +436,17 @@ body,
 #root {
   width: 100%;
   min-height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-wiggle,
+  .animate-shake,
+  .animate-pulse {
+    animation: none !important;
+  }
+  .wobble-hover:hover,
+  .wobble-hover:active {
+    transform: none;
+  }
 }

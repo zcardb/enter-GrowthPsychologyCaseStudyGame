@@ -48,7 +48,7 @@ export function StoryStage({ level, panel, onNext, onPrev, onSkip }: StoryStageP
       }
     >
       {panel === 0 && (
-        <p className="tape tape-sm note doodle-card relative mb-3 border-2 border-ink bg-accent-soft px-3 pb-2 pl-3.5 pt-4 text-sm text-foreground">
+        <p className="tape tape-sm note-lined doodle-card relative mb-3 border-2 border-ink bg-accent-soft px-3 pb-2 pl-3.5 pt-4 text-sm text-foreground">
           {level.brief}
         </p>
       )}
@@ -74,7 +74,7 @@ export function StoryStage({ level, panel, onNext, onPrev, onSkip }: StoryStageP
             key={i}
             className={cn(
               "h-1.5 rounded-full border border-ink/40 transition-all",
-              i === panel ? "w-5 bg-primary" : "w-1.5 bg-ink/15",
+              i === panel ? "w-7 bg-primary" : "w-2 bg-ink/15",
             )}
           />
         ))}

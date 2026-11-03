@@ -22,6 +22,8 @@ const buttonVariants = cva(
           "doodle-pill border-2 border-ink bg-primary font-bold text-primary-foreground shadow-comic transition-all hover:-translate-y-0.5 hover:-rotate-1 hover:shadow-comic-lg active:translate-x-[2px] active:translate-y-[2px] active:rotate-0 active:shadow-none",
         comicLight:
           "doodle-pill border-2 border-ink bg-card font-bold text-foreground shadow-comic transition-all hover:-translate-y-0.5 hover:rotate-1 hover:shadow-comic-lg active:translate-x-[2px] active:translate-y-[2px] active:rotate-0 active:shadow-none",
+        stickerMint:
+          "sticker border-2 border-ink bg-secondary font-bold text-secondary-foreground transition-transform hover:-translate-y-0.5 hover:rotate-0 active:translate-y-0",
         comicSuccess:
           "doodle-pill border-2 border-ink bg-success font-bold text-success-foreground shadow-comic transition-all hover:-translate-y-0.5 hover:rotate-1 hover:shadow-comic-lg active:translate-x-[2px] active:translate-y-[2px] active:rotate-0 active:shadow-none",
         lemon:

@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
 import { BeforeAfter } from "@/components/scene/BeforeAfter";
 import { SceneView } from "@/components/scene/SceneView";
+import { RoughFrame } from "@/components/comic/RoughFrame";
+import { Swirl } from "@/components/comic/Doodle";
 import { chapterById } from "@/game/chapters";
 import { levelNumber } from "@/game/levels";
 import { applyOps } from "@/game/scenes/apply-ops";
@@ -49,6 +51,7 @@ export function LevelPlayer({ level }: { level: Level }) {
           className="paper-dots doodle-card relative min-h-0 overflow-hidden border-2 border-ink bg-card shadow-comic"
           aria-label={t("play.sceneLabel")}
         >
+          <RoughFrame className="opacity-30" offset={3} />
           <AnimatePresence mode="wait">
             <motion.div
               key={`${state.stage === "outcome" || state.stage === "review" ? `after-${state.chosenId}` : "base"}`}
@@ -63,7 +66,11 @@ export function LevelPlayer({ level }: { level: Level }) {
           </AnimatePresence>
         </section>
 
-        <section className="flex max-h-[58dvh] min-h-0 flex-col landscape:max-h-none" aria-live="polite">
+        <section
+          className="relative flex max-h-[58dvh] min-h-0 flex-col landscape:max-h-none"
+          aria-live="polite"
+        >
+          <Swirl className="pointer-events-none absolute bottom-1 right-1 hidden h-10 w-16 text-ink/10 lg:block" />
           {state.stage === "story" && (
             <StoryStage
               level={level}

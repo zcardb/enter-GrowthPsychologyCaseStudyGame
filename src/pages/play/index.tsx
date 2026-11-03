@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 import { Lock, MapPinOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { RoughFrame } from "@/components/comic/RoughFrame";
 import { Swirl } from "@/components/comic/Doodle";
 import { levelById, levelNumber } from "@/game/levels";
 import { useGameProgress } from "@/hooks/use-game-progress";
@@ -22,11 +23,14 @@ const Play = () => {
         className="tape doodle-card relative w-full max-w-sm border-2 border-ink bg-card p-6 pt-8 text-center shadow-comic-lg"
         data-testid={locked ? "level-locked" : "level-missing"}
       >
+        <RoughFrame className="opacity-35" offset={2.5} />
         <Swirl className="absolute -right-3 top-6 h-6 w-9 opacity-70" />
         <span className="sticker mx-auto flex h-14 w-14 -rotate-3 items-center justify-center border-2 border-ink bg-accent">
           {locked ? <Lock className="h-6 w-6" /> : <MapPinOff className="h-6 w-6" />}
         </span>
-        <h1 className="mt-4 font-display text-2xl">{locked ? t("play.locked.title") : t("play.notFound.title")}</h1>
+        <h1 className="mt-4 font-display text-2xl">
+          <span className="marker-pink">{locked ? t("play.locked.title") : t("play.notFound.title")}</span>
+        </h1>
         {locked && <p className="mt-2 text-sm text-muted-foreground">{t("play.locked.desc")}</p>}
         <div className="mt-5 flex flex-col gap-2.5">
           {locked && currentLevelId && (

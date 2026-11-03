@@ -87,3 +87,53 @@ export function Swirl({ className }: DoodleProps) {
     </svg>
   );
 }
+
+/** Hand-drawn circled scribble, sized to its parent box. */
+export function ScribbleCircle({ className }: DoodleProps) {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      className={cn("pointer-events-none absolute inset-0 h-full w-full text-ink", className)}
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M52 7c23 1 40 17 39 40-1 22-18 45-42 45C27 92 10 75 10 51 10 29 28 6 54 8"
+        stroke="currentColor"
+        strokeWidth={2.4}
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+/** Curved marker arrow, used to point at the primary action. */
+export function ArrowCurve({ className }: DoodleProps) {
+  return (
+    <svg viewBox="0 0 46 40" className={cn("text-primary-ink", className)} fill="none" aria-hidden="true">
+      <path d="M5 34c2-14 12-25 32-27" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" />
+      <path d="M28 3l9 4-6 8" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/** Three loose confetti strokes for celebration strips. */
+export function Confetti({ className }: DoodleProps) {
+  return (
+    <svg viewBox="0 0 40 24" className={cn("text-primary-ink", className)} fill="none" aria-hidden="true">
+      <path d="M4 18l5-9" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" />
+      <path d="M16 8l4 6" className="text-chapter-2" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" />
+      <path d="M28 20l6-11" className="text-chapter-3" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" />
+      <circle cx="35" cy="5" r="1.8" className="fill-primary" />
+    </svg>
+  );
+}
+
+/** Short hand-drawn dashed connector between steps. */
+export function AlongDashed({ className }: DoodleProps) {
+  return (
+    <svg viewBox="0 0 40 6" className={cn("text-ink/35", className)} fill="none" aria-hidden="true">
+      <path d="M1 3.4Q10 1.6 20 3.2T39 2.8" stroke="currentColor" strokeWidth={2} strokeDasharray="5 5" strokeLinecap="round" />
+    </svg>
+  );
+}

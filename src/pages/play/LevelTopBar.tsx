@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { chapterBg } from "@/components/game/chapter-tone";
+import { AlongDashed } from "@/components/comic/Doodle";
 import type { Chapter, Level } from "@/game/types";
 import type { Stage } from "@/hooks/use-level-flow";
 import { cn } from "@/lib/utils";
@@ -38,17 +39,19 @@ export function LevelTopBar({ level, chapter, number, stage }: LevelTopBarProps)
       </div>
       <ol className="flex shrink-0 items-center gap-1" aria-label={t("play.stages")}>
         {STAGES.map((s, i) => (
-          <li
-            key={s}
-            className={cn(
-              "doodle-pill border-2 px-1.5 py-0.5 text-[10px] font-bold leading-none transition-colors sm:px-2 sm:text-[11px]",
-              i < current && "border-ink bg-ink text-paper",
-              i === current && "-rotate-2 border-ink bg-accent text-accent-foreground shadow-[2px_2px_0_0_hsl(var(--ink))]",
-              i > current && "border-ink/20 text-muted-foreground",
-            )}
-            aria-current={i === current ? "step" : undefined}
-          >
-            {t(`play.stage.${s}`)}
+          <li key={s} className="flex items-center gap-1">
+            <span
+              className={cn(
+                "doodle-pill border-2 px-1.5 py-0.5 text-[10px] font-bold leading-none transition-colors sm:px-2 sm:text-[11px]",
+                i < current && "border-ink bg-ink text-paper",
+                i === current && "-rotate-2 border-ink bg-accent text-accent-foreground shadow-[2px_2px_0_0_hsl(var(--ink))]",
+                i > current && "border-dashed border-ink/25 text-muted-foreground",
+              )}
+              aria-current={i === current ? "step" : undefined}
+            >
+              {t(`play.stage.${s}`)}
+            </span>
+            {i < STAGES.length - 1 && <AlongDashed className="h-2 w-2.5 text-ink/30 sm:w-3.5" />}
           </li>
         ))}
       </ol>

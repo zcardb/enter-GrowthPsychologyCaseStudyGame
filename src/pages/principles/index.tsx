@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PrincipleCard } from "@/components/game/PrincipleCard";
-import { Squiggle, StarDoodle } from "@/components/comic/Doodle";
+import { Sparkle, Squiggle, StarDoodle } from "@/components/comic/Doodle";
 import { levelNumber, levelsUsingPrinciple } from "@/game/levels";
 import { PRINCIPLES } from "@/game/principles";
 import type { Principle } from "@/game/types";
@@ -26,7 +26,7 @@ const Principles = () => {
   return (
     <div className="pt-safe pb-safe px-safe min-h-[100dvh]">
       <main className="mx-auto max-w-5xl py-2 sm:py-6">
-        <header className="flex items-start gap-3">
+        <header className="relative flex items-start gap-3">
           <Button asChild variant="comicLight" size="iconTouch" className="shrink-0" data-testid="principles-back">
             <Link to="/" aria-label={t("play.back")}>
               <ArrowLeft />
@@ -37,21 +37,24 @@ const Principles = () => {
               <span className="doodle-underline">{t("principles.title")}</span>
             </h1>
             <p className="mt-3 max-w-2xl text-sm text-muted-foreground">{t("principles.subtitle")}</p>
-            <p className="mt-2 flex items-center gap-1.5 text-sm font-bold">
+            <p className="sticker mt-3 inline-flex items-center gap-1.5 border-2 border-ink bg-accent-soft px-2.5 py-1 text-sm font-bold">
               <StarDoodle className="h-4 w-4" />
               {t("home.principlesCount", { seen: seen.size, total: PRINCIPLES.length })}
             </p>
           </div>
+          <Sparkle className="absolute right-1 top-2 hidden h-6 w-6 animate-float sm:block" />
         </header>
 
         {GROUPS.map((group) => (
-          <section key={group} className="mt-8">
-            <h2
-              className={`sticker mb-3 inline-block -rotate-1 border-2 border-ink px-3 py-1 text-sm font-bold ${groupTone[group]}`}
-            >
-              {group}
-            </h2>
-            <Squiggle className="mb-3 h-2.5 w-28 text-primary-ink/40" />
+          <section key={group} className="mt-9">
+            <div className="mb-4 flex items-center gap-3">
+              <h2
+                className={`paper-tab inline-block -rotate-1 border-2 border-ink px-3 py-1 text-sm font-bold ${groupTone[group]}`}
+              >
+                {group}
+              </h2>
+              <Squiggle className="h-2.5 w-24 text-primary-ink/35" />
+            </div>
             <div className="grid gap-4 sm:grid-cols-2">
               {PRINCIPLES.filter((p) => p.group === group).map((p) =>
                 seen.has(p.id) ? (
@@ -60,8 +63,8 @@ const Principles = () => {
                     principle={p}
                     className={p.id.length % 2 === 0 ? "tilt-1" : "tilt-2"}
                     footer={
-                      <div className="mt-3 border-t-2 border-dashed border-ink/20 pt-2">
-                        <p className="text-xs font-bold text-muted-foreground">{t("principles.levels")}</p>
+                      <div className="relative mt-3 sketch-seam pt-2">
+                        <p className="pt-2 text-xs font-bold text-muted-foreground">{t("principles.levels")}</p>
                         <div className="mt-1.5 flex flex-wrap gap-1.5">
                           {levelsUsingPrinciple(p.id)
                             .filter((l) => cleared.has(l.id))
@@ -81,15 +84,21 @@ const Principles = () => {
                 ) : (
                   <div
                     key={p.id}
-                    className="lock-hatch doodle-card-alt flex min-h-[120px] flex-col items-center justify-center gap-2 border-2 border-dashed border-ink/30 bg-card/50 p-4 text-center text-muted-foreground"
+                    className="doodle-card-alt relative flex min-h-[124px] flex-col items-center justify-center gap-1.5 overflow-hidden border-2 border-dashed border-ink/25 bg-card/55 p-4 text-center"
                   >
-                    <span className="sticker flex h-9 w-9 rotate-3 items-center justify-center border-2 border-ink/40 bg-card">
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute right-3 top-0 font-marker text-4xl font-bold text-ink/10"
+                    >
+                      ?
+                    </span>
+                    <span className="sticker flex h-9 w-9 -rotate-6 items-center justify-center border-2 border-ink/40 bg-card text-ink/45">
                       <Lock className="h-4 w-4" />
                     </span>
-                    <p className="font-display text-lg blur-[3px]" aria-hidden>
+                    <p className="font-display text-lg leading-tight text-ink/25" aria-hidden>
                       {p.name}
                     </p>
-                    <p className="text-xs">{t("principles.locked")}</p>
+                    <p className="text-xs text-muted-foreground">{t("principles.locked")}</p>
                   </div>
                 ),
               )}

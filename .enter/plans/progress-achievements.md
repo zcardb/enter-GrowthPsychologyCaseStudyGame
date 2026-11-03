@@ -117,32 +117,32 @@ export interface Progress {
 
 ## Implementation checklist
 
-- [ ] `src/game/progress-store.ts` 的 `Progress` 升级为 v2，`read()` 能把 v1 存档补全为 v2 且保留 `cleared` / `attempts` / `seenPrinciples`
-- [ ] `progress-store.ts` 新增 `recordChoice(levelId, optionId, passes)`：每次选择 `attempts + 1`，失败 optionId 去重写入 `mistakes`
-- [ ] `completeLevel` 在新通关且 `attempts === 1` 时写入 `firstTry`，并写入 `clearedAt`，同时返回本次新解锁的徽章数组
-- [ ] `src/hooks/use-game-progress.ts` 暴露 `recordChoice`、返回新徽章的 `completeLevel`，移除不再使用的 `recordAttempt`
-- [ ] `src/pages/play/LevelPlayer.tsx` 的 `choose` 改为调用 `recordChoice(level.id, id, option.passes)`
-- [ ] 新增 `src/game/progress-summary.ts`，导出 `summarizeProgress`（计数、章节、`reviewLevels`）且不引入 React
-- [ ] 新增 `src/game/achievements.ts`，包含 11 枚徽章定义、icon 字符串枚举与 `evaluateAchievements`
-- [ ] 新增 `src/pages/progress/AchievementCard.tsx`，区分解锁/未解锁两种渲染并显示 `value / target`
-- [ ] 新增 `src/pages/progress/StatTiles.tsx` 与 `ChapterReport.tsx`，复用 `ProgressBar` 与 `chapterTint`/`chapterBg`
-- [ ] 新增 `src/pages/progress/index.tsx`：统计、章节、徽章墙、「值得回看」列表、空状态、返回按钮
-- [ ] `src/router.tsx` 注册 `/progress` 路由（在 `*` 之前）
-- [ ] `src/pages/home/HeroSection.tsx` 增加 `/progress` 文字链接（`data-testid="home-progress"`）
-- [ ] `src/pages/play/ReviewStage.tsx` 渲染本次新解锁徽章贴纸，重玩不重复提示
-- [ ] `public/locales/zh-CN.json` 补齐 `progress.*`、`achievements.<id>.*`、`play.review.newBadge` 全部 key
-- [ ] `src/game/validate-content.ts` 校验徽章 id 唯一、章节引用存在、`target > 0`
+- [x] `src/game/progress-store.ts` 的 `Progress` 升级为 v2，`read()` 能把 v1 存档补全为 v2 且保留 `cleared` / `attempts` / `seenPrinciples`
+- [x] `progress-store.ts` 新增 `recordChoice(levelId, optionId, passes)`：每次选择 `attempts + 1`，失败 optionId 去重写入 `mistakes`
+- [x] `completeLevel` 在新通关且 `attempts === 1` 时写入 `firstTry`，并写入 `clearedAt`，同时返回本次新解锁的徽章数组
+- [x] `src/hooks/use-game-progress.ts` 暴露 `recordChoice`、返回新徽章的 `completeLevel`，移除不再使用的 `recordAttempt`
+- [x] `src/pages/play/LevelPlayer.tsx` 的 `choose` 改为调用 `recordChoice(level.id, id, option.passes)`
+- [x] 新增 `src/game/progress-summary.ts`，导出 `summarizeProgress`（计数、章节、`reviewLevels`）且不引入 React
+- [x] 新增 `src/game/achievements.ts`，包含 11 枚徽章定义、icon 字符串枚举与 `evaluateAchievements`
+- [x] 新增 `src/pages/progress/AchievementCard.tsx`，区分解锁/未解锁两种渲染并显示 `value / target`
+- [x] 新增 `src/pages/progress/StatTiles.tsx` 与 `ChapterReport.tsx`，复用 `ProgressBar` 与 `chapterTint`/`chapterBg`
+- [x] 新增 `src/pages/progress/index.tsx`：统计、章节、徽章墙、「值得回看」列表、空状态、返回按钮
+- [x] `src/router.tsx` 注册 `/progress` 路由（在 `*` 之前）
+- [x] `src/pages/home/HeroSection.tsx` 增加 `/progress` 文字链接（`data-testid="home-progress"`）
+- [x] `src/pages/play/ReviewStage.tsx` 渲染本次新解锁徽章贴纸，重玩不重复提示
+- [x] `public/locales/zh-CN.json` 补齐 `progress.*`、`achievements.<id>.*`、`play.review.newBadge` 全部 key
+- [x] `src/game/validate-content.ts` 校验徽章 id 唯一、章节引用存在、`target > 0`
 
 ## Verification checklist
 
-- [ ] `pnpm run lint` 无报错
-- [ ] `pnpm exec tsc --noEmit` 无类型错误
-- [ ] `pnpm run build` 成功
-- [ ] dev 启动日志显示 50 关内容校验通过，且无徽章校验错误
-- [ ] 空存档下 `/progress` 四项统计为 0、11 枚徽章全部锁定、空状态 CTA 指向 `/play/c1-l01`
+- [x] `pnpm run lint` 无报错
+- [x] `pnpm exec tsc --noEmit` 无类型错误
+- [x] `pnpm run build` 成功
+- [x] dev 启动日志显示 50 关内容校验通过，且无徽章校验错误
+- [x] 空存档下 `/progress` 四项统计为 0、11 枚徽章全部锁定、空状态 CTA 指向 `/play/c1-l01`
 - [ ] 通关第 1 关后 `/progress` 显示 `1 / 50`、`1 / 10`（第 1 章），`first-clear` 已解锁
 - [ ] 先错后对的关卡落在「值得回看」列表，且不计入一次通过数
-- [ ] v1 存档迁移后刷新页面不丢失已通关记录、控制台无报错
+- [x] v1 存档迁移后刷新页面不丢失已通关记录、控制台无报错
 - [ ] `/play/c1-l10` 复盘页出现章节完成贴纸与新徽章贴纸，重玩后不重复弹出
-- [ ] `mobile_390` 与 `desktop_1280` 的 `/progress` 截图无横向溢出、统计卡与徽章卡片不重叠
+- [x] `mobile_390` 与 `desktop_1280` 的 `/progress` 截图无横向溢出、统计卡与徽章卡片不重叠
 - [ ] 首页清空进度后 `/progress` 统计归零、徽章全部锁定、首页入口仍可正常跳转

@@ -21,7 +21,7 @@ import { StoryStage } from "./StoryStage";
 export function LevelPlayer({ level }: { level: Level }) {
   const [state, dispatch] = useLevelFlow();
   const { t } = useTranslation();
-  const { recordAttempt } = useGameProgress();
+  const { recordChoice } = useGameProgress();
   const chapter = chapterById.get(level.chapterId)!;
   const option = level.options.find((o) => o.id === state.chosenId) ?? null;
   const applied = useMemo(() => (option ? applyOps(level.base, option.ops) : null), [level.base, option]);
@@ -31,7 +31,8 @@ export function LevelPlayer({ level }: { level: Level }) {
   );
 
   const choose = (id: string) => {
-    recordAttempt(level.id);
+    const picked = level.options.find((o) => o.id === id);
+    recordChoice(level.id, id, picked?.passes ?? false);
     dispatch({ type: "choose", optionId: id });
   };
 

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -9,6 +9,7 @@ import { Confetti } from "@/components/comic/Doodle";
 import { chapterById } from "@/game/chapters";
 import { levelNumber, nextLevelId, levelById } from "@/game/levels";
 import { principleById } from "@/game/principles";
+import type { Achievement } from "@/game/achievements";
 import type { Level, Option } from "@/game/types";
 import { useGameProgress } from "@/hooks/use-game-progress";
 import { StageShell } from "./StageShell";
@@ -23,13 +24,15 @@ interface ReviewStageProps {
 export function ReviewStage({ level, option, attempts, onReplay }: ReviewStageProps) {
   const { t } = useTranslation();
   const { completeLevel } = useGameProgress();
+  const [newBadges, setNewBadges] = useState<Achievement[]>([]);
   const nextId = nextLevelId(level.id);
   const next = nextId ? levelById.get(nextId) : undefined;
   const chapterDone = !next || next.chapterId !== level.chapterId;
   const chapter = chapterById.get(level.chapterId);
 
   useEffect(() => {
-    completeLevel(level.id, level.principleIds);
+    const unlocked = completeLevel(level.id, level.principleIds);
+    if (unlocked.length > 0) setNewBadges(unlocked);
   }, [completeLevel, level.id, level.principleIds]);
 
   return (
@@ -69,6 +72,23 @@ export function ReviewStage({ level, option, attempts, onReplay }: ReviewStagePr
           <Sparkles className="h-5 w-5" />
           {next ? t("play.review.chapterDone", { n: chapter?.index }) : t("play.review.allDone")}
           <Confetti className="absolute -right-1 -top-2 h-4 w-7" />
+        </motion.div>
+      )}
+
+      {newBadges.length > 0 && (
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="sticker mb-3 flex flex-wrap items-center gap-1.5 border-2 border-ink bg-primary-soft px-3 py-2 text-xs font-bold"
+          data-testid="review-new-badges"
+        >
+          <Sparkles className="h-4 w-4 text-primary-ink" />
+          {t("play.review.newBadge")}
+          {newBadges.map((badge) => (
+            <span key={badge.id} className="doodle-pill border-2 border-ink bg-card px-2 py-0.5 text-[11px]">
+              {t(`achievements.${badge.id}.title`)}
+            </span>
+          ))}
         </motion.div>
       )}
 

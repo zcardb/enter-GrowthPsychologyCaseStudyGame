@@ -78,6 +78,16 @@ export function HeroSection() {
               </span>
             </div>
             <ProgressBar value={clearedCount} max={total} />
+            <div className="mt-2 flex justify-end">
+              <Link
+                to="/progress"
+                data-testid="home-progress"
+                className="inline-flex items-center gap-1 text-xs font-bold text-primary-ink underline-offset-4 hover:underline"
+              >
+                {t("progress.entry")}
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
           </div>
 
           <div className="relative mt-5 flex flex-wrap gap-3">

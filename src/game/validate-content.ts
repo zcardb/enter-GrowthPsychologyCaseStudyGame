@@ -3,6 +3,7 @@
  * Runs once at startup in dev (see main.tsx) and logs every issue found.
  */
 import { CHAPTERS } from "./chapters";
+import { ACHIEVEMENTS } from "./achievements";
 import { LEVELS } from "./levels";
 import { principleById } from "./principles";
 import { danglingRefs } from "./scenes/apply-ops";
@@ -54,6 +55,15 @@ export function validateContent(): string[] {
         at(`第 ${i + 1} 幕高亮了不存在的元素 ${ref}`),
       ),
     );
+  }
+
+  const seenAchievements = new Set<string>();
+  for (const achievement of ACHIEVEMENTS) {
+    if (seenAchievements.has(achievement.id)) issues.push(`[achievement] ID 重复 ${achievement.id}`);
+    seenAchievements.add(achievement.id);
+    if (achievement.target <= 0) issues.push(`[achievement] ${achievement.id} 的目标值必须大于 0`);
+    if (achievement.id.startsWith("chapter-") && !CHAPTERS.some((c) => `chapter-${c.id}` === achievement.id))
+      issues.push(`[achievement] ${achievement.id} 引用了不存在的章节`);
   }
 
   return issues;

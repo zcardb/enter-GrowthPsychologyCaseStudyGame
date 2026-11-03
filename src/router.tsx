@@ -1,6 +1,7 @@
 import Home from "./pages/home";
 import Play from "./pages/play";
 import Principles from "./pages/principles";
+import Progress from "./pages/progress";
 import NotFound from "./pages/NotFound";
 
 export const routers = [
@@ -18,6 +19,11 @@ export const routers = [
     path: "/principles",
     name: "principles",
     element: <Principles />,
+  },
+  {
+    path: "/progress",
+    name: "progress",
+    element: <Progress />,
   },
   /* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */
   {
